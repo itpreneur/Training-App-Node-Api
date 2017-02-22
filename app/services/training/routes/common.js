@@ -40,7 +40,15 @@ let uploadDocuments = multer({ storage: documents_storage });
 
 
 let router = express.Router();
-// list all users
+
+/**
+ * @api {get} /users Request User information
+ * @apiName GetUsers
+ * @apiGroup User
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 router.get('/', (req, res) => {
     User.find({}, (error, users) => {
         if (error) {
@@ -56,7 +64,15 @@ router.get('/', (req, res) => {
     });
 
 });
-
+/**
+ * @api {get} /users/make-trainer make user Trainer
+ * @apiName Make-trainer
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 router.get('/make-trainer', (req, res) => {
     UserController.update(req.user._id, { type: 2 }, (error, user) => {
         if (error) {
@@ -66,6 +82,16 @@ router.get('/make-trainer', (req, res) => {
         }
     });
 });
+
+/**
+ * @api {POST} /users/verify-phone make user Trainer
+ * @apiName verify-phone
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 
 router.post('/verify-phone', (req, res) => {
 
@@ -93,8 +119,16 @@ router.post('/verify-phone', (req, res) => {
         });
 
     }
-
 });
+/**
+ * @api {GET} /users/verify-phone Varify User Phone
+ * @apiName verify-phone
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 router.get('/verify-phone', (req, res) => {
     let verification_code = Helper.verificationCode();
     Twilio.phone_verification(req.user.phone, verification_code, (data) => {
@@ -121,7 +155,15 @@ router.get('/verify-phone', (req, res) => {
     });
 
 });
-
+/**
+ * @api {GET} /users/:id find User By ID
+ * @apiName findById
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 
 router.get('/:id', (req, res) => {
     User.findById(req.params.id, (error, user) => {
@@ -138,26 +180,15 @@ router.get('/:id', (req, res) => {
         }
     });
 });
-// save new user
-router.post('/', (req, res) => {
-
-    let data = req.body;
-    let user = new User({
-        name: data.name,
-        email: data.email,
-    });
-    user.save((error, user) => {
-        if (error) {
-            console.log('error', error);
-        }
-        user = UserTransformer.transform(user);
-        res.json({
-            code: 200,
-            message: 'success',
-            users: user
-        });
-    });
-});
+/**
+ * @api {POST} /users/:id update user
+ * @apiName findById
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 // update user details
 router.post('/update', (req, res) => {
     UserController.update(req.user._id, req.body, (error, user) => {
