@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+	head
+		meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+		meta(name='viewport' content='width=device-width')
+		title Welcome to Ubmas
+		link(rel='stylesheet' href='style.css' media="all")
+
+	body(itemscope itemtype="http://schema.org/EmailMessage")
+
+		table.body-wrap
+			tr
+				td
+				td.container(width="100")
+
+					.content
+
+						table.main(width="100%" cellpadding="0" cellspacing="0")
+							tr
+								td.alert.alert-warning.
+									Ubmas - You Just Received A New Message.
+							tr
+								td.content-wrap
+									table(width="100%" cellpadding="0" cellspacing="0")
+										tr
+											td.content-block
+												h2 Hi #{message.to.name},
+										tr
+											td.content-block
+												p You have received a new message.
+
+										tr
+											td.content-block
+												p.title Message Details
+												div.overflow #[span.key From:] #[span.value #[strong #{message.from.name}] ]
+												div.overflow #[span.key Message:] #[span.value !{html_text}]
+												div.overflow #[span.key Timestamp:] #[span.value #{message.created_at}]
+										tr
+											td.content-block.
+												Thank you.
+						div.footer
+							table(width="100%")
+								tr
+									td.aligncenter.content-block.
+										&copy; 2016, Ubmas. All Rights Reserved.
+
+
+
+
+
+
+
+

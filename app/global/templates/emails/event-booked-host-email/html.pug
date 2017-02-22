@@ -1,0 +1,53 @@
+doctype html
+html(lang="en")
+	head
+		meta(http-equiv='Content-Type' content='text/html; charset=UTF-8')
+		meta(name='viewport' content='width=device-width')
+		title Welcome to Ubmas
+		link(rel='stylesheet' href='style.css' media="all")
+
+	body(itemscope itemtype="http://schema.org/EmailMessage")
+
+		table.body-wrap
+			tr
+				td
+				td.container(width="100")
+
+					.content
+
+						table.main(width="100%" cellpadding="0" cellspacing="0")
+							tr
+								td.alert.alert-warning.
+									Ubmas - Your Event Has Been Successfully Booked.
+							tr
+								td.content-wrap
+									table(width="100%" cellpadding="0" cellspacing="0")
+										tr
+											td.content-block
+												h2 Hi #{event.user.name},
+										tr
+											td.content-block
+												p Your Event #[a(href=event_url) #{event.title}] has been booked.
+
+										tr
+											td.content-block
+												p.title Booking Details
+												div.overflow #[span.key Booked By:] #[span.value #[strong #{guest.name}] ]
+												div.overflow #[span.key Total Guests:] #[span.value #{booking.total_guests}]
+												div.overflow #[span.key Amount Paid:] #[span.value #{booking.amount}]
+										tr
+											td.content-block.
+												Thank you.
+						div.footer
+							table(width="100%")
+								tr
+									td.aligncenter.content-block.
+										&copy; 2016, Ubmas. All Rights Reserved.
+
+
+
+
+
+
+
+

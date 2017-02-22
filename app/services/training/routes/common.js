@@ -1,0 +1,224 @@
+'use strict';
+
+import express from 'express';
+import User from '../model/user';
+import UserTransformer from '../transformer/UserTransformer';
+import ResponseTemplate from 'app/global/templates/response';
+import UserController from '../controller/UserController';
+
+import Helper from 'app/helper';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import config_server from 'app/config/server';
+// let upload = multer({ dest: path.join( config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR ) });
+
+import Twilio from 'app/helper/Twilio';
+let storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR));
+    },
+    filename: function(req, file, cb) {
+        let extension = Helper.getFileExtension(file.originalname);
+        // cb( null, `${file.fieldname}-${req.user.id}.${extension}` );
+        cb(null, `${req.user.id}-${ Helper.randomString() }.${extension}`);
+    }
+})
+let upload = multer({ storage: storage });
+
+
+let documents_storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(config_server.UPLOAD_DIR, config_server.DOCUMENT_UPLOAD_DIR));
+    },
+    filename: function(req, file, cb) {
+        let extension = Helper.getFileExtension(file.originalname);
+        cb(null, `${req.user.id}-${ Helper.randomString() }.${extension}`);
+    }
+})
+let uploadDocuments = multer({ storage: documents_storage });
+
+
+let router = express.Router();
+// list all users
+router.get('/', (req, res) => {
+    User.find((error, users) => {
+        if (error) {
+            res.send(error);
+        }
+        users = UserTransformer.transform(users);
+        res.json({
+            code: 200,
+            message: 'success',
+            users: users
+        });
+
+    });
+
+});
+
+router.get('/make-trainer', (req, res) => {
+    UserController.update(req.user._id, { type: 2 }, (error, user) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+            res.json(ResponseTemplate.success('your data has been successfully updated'));
+        }
+    });
+});
+
+router.post('/verify-phone', (req, res) => {
+
+    let v_code = req.user.meta.verification_code || '';
+
+    if (req.body.code != v_code) {
+        res.json({
+            code: 210,
+            message: 'error',
+            description: 'invalid code',
+        });
+    } else {
+
+        UserController.update(req.user._id, { phone_verified: true }, (error, user) => {
+            if (error) {
+                res.json(ResponseTemplate.updateErrorOccoured(error));
+            } else {
+                user = UserTransformer.transform(user);
+                res.json({
+                    code: 200,
+                    message: 'success',
+                    user: user,
+                });
+            }
+        });
+
+    }
+
+});
+router.get('/verify-phone', (req, res) => {
+    let verification_code = Helper.verificationCode();
+    Twilio.phone_verification(req.user.phone, verification_code, (data) => {
+        if (!data) {
+            res.json({
+                code: 210,
+                message: 'error',
+                description: 'invalid phone number provided',
+            });
+        } else {
+            UserController.update(req.user._id, { verification_code: verification_code }, (error, user) => {
+                if (error) {
+                    res.json(ResponseTemplate.updateErrorOccoured(error));
+                } else {
+                    res.json({
+                        code: 200,
+                        message: 'success',
+                    });
+
+                }
+            });
+        }
+
+    });
+
+});
+
+router.get('/:id', (req, res) => {
+    User.findById(req.params.id, (error, user) => {
+        if (error) {
+            res.json(ResponseTemplate.userNotFound());
+            // res.send(error);
+        } else {
+            user = UserTransformer.transform(user);
+            res.json({
+                code: 200,
+                message: 'success',
+                user: user
+            });
+        }
+    });
+});
+// save new user
+router.post('/', (req, res) => {
+
+    let data = req.body;
+    let user = new User({
+        name: data.name,
+        email: data.email,
+    });
+    user.save((error, user) => {
+        if (error) {
+            console.log('error', error);
+        }
+        user = UserTransformer.transform(user);
+        res.json({
+            code: 200,
+            message: 'success',
+            users: user
+        });
+    });
+});
+// update user details
+router.post('/update', (req, res) => {
+    UserController.update(req.user._id, req.body, (error, user) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+            res.json(ResponseTemplate.success('your data has been successfully updated'));
+        }
+    });
+});
+// upload users profile picture.
+router.post('/upload-profile-picture', upload.single('avatar'), (req, res) => {
+    UserController.update(req.user._id, { profile_picture: req.file.filename }, (error, user) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+            res.json(ResponseTemplate.success(
+                'your profile picture has been successfully uploaded', { profile_picture: Helper.avatarURL(user.profile_picture) }));
+            Helper.deleteFile('profile', req.user.profile_picture);
+        }
+    });
+});
+// upload host documents.
+router.post('/upload-documents', uploadDocuments.array('documents'), (req, res) => {
+    let documents = {};
+    req.files.map((file) => {
+        documents.url = file.filename;
+        documents.originalname = file.originalname;
+        documents.timestamp = new Date();
+    });
+    UserController.update(req.user.id, { document: documents }, (error, user) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+            let user_documents = [];
+            if (user.documents) {
+                user.documents.map((doc) => {
+                    user_documents.push(Helper.userDocumentURL(doc.url));
+                });
+            }
+            res.json(ResponseTemplate.success(
+                'host documents have been successfully uploaded', { documents: user_documents }));
+        }
+    });
+});
+
+// delete event image
+router.post('/delete-document', (req, res) => {
+    UserController.deleteDocument(req.user.id, req.body.filename, (error, user) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+            let user_documents = [];
+            if (user.documents) {
+                user.documents.map((doc) => {
+                    user_documents.push(Helper.userDocumentURL(doc.url));
+                });
+            }
+            res.json(ResponseTemplate.success(
+                'host document has been successfully deleted', { documents: user_documents }));
+            Helper.deleteFile('document', req.body.filename);
+        }
+    });
+});
+module.exports = router
