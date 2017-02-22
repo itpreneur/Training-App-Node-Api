@@ -42,7 +42,7 @@ let uploadDocuments = multer({ storage: documents_storage });
 let router = express.Router();
 // list all users
 router.get('/', (req, res) => {
-    User.find((error, users) => {
+    User.find({}, (error, users) => {
         if (error) {
             res.send(error);
         }
@@ -121,6 +121,7 @@ router.get('/verify-phone', (req, res) => {
     });
 
 });
+
 
 router.get('/:id', (req, res) => {
     User.findById(req.params.id, (error, user) => {
