@@ -1,7 +1,7 @@
 process.env.NODE_ENV = 'test';
 
 import mongoose from 'mongoose';
-import User from '../app/services/training/model/training';
+import Training from '../app/services/training/model/training';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 describe('Training', () => {
 
     beforeEach((done) => {
-        User.remove({}, (err) => {
+        Training.remove({}, (err) => {
             done();
         });
     });
@@ -35,7 +35,7 @@ describe('Training', () => {
     describe('/GET HTTP get All Training', () => {
         it('it should GET all the Training', (done) => {
             chai.request(server)
-                .get('/Training/')
+                .get('/training/')
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
@@ -47,7 +47,7 @@ describe('Training', () => {
     /*
      * Test the /POST route
      */
-    describe('/POST Register User', () => {
+    describe('/POST Register Training', () => {
         it('it should not POST a user without pages field', (done) => {
             let user = {
                 name: "The Lord of the Rings",
@@ -56,7 +56,7 @@ describe('Training', () => {
                 varify_password: "123456"
             }
             chai.request(server)
-                .post('/auth/register')
+                .post('/training/34awefsdw3rewd')
                 .send(user)
                 .end((err, res) => {
                     res.should.have.status(200);
@@ -73,7 +73,7 @@ describe('Training', () => {
     /*
      * Test the /POST route
      */
-    describe('/POST Login User', () => {
+    describe('/POST Login Training', () => {
         it('it should not POST a user without pages field', (done) => {
             let user = {
                 password: "123456",

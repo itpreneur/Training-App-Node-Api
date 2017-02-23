@@ -11,7 +11,7 @@ let ValidAuthToken = (req, res, next) => {
     let token;
 
     if (authorization_jeader) {
-        token = authorization_jeader.split(".")[1];
+        token = authorization_jeader.split(" ")[1];
     }
 
     if (token) {
