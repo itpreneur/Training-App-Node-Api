@@ -21,4 +21,11 @@ TrainingSchema.virtual('registration', {
     localField: '_id',
     foreignField: 'training'
 });
+
+TrainingSchema.virtual('topic', {
+    ref: 'Topic',
+    localField: '_id',
+    foreignField: 'training'
+});
+
 export default mongoose.model('Training', TrainingSchema);

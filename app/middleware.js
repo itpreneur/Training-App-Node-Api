@@ -16,19 +16,27 @@ import csrf from 'csurf';
 
 
 let middleware = function(app) {
-    // enable csrf  //02
-    //app.use(csrf());
+
     app.use(passport.initialize());
     app.set('port', process.env.PORT || config_server.PORT);
-    // disable powered by from response header //01
+    // adding security fixes
     app.disable('x-powered-by');
-    //app.use(helmet())
+    app.use(helmet())
+    app.use(helmet.noCache({noEtag: true})); //set Cache-Control header
+    app.use(helmet.noSniff());    // set X-Content-Type-Options header
+    app.use(helmet.frameguard()); // set X-Frame-Options header
+    app.use(helmet.xssFilter());  // set X-XSS-Protection header
+
     app.enable('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
     app.use(express_session({
+        name: 'SESS_ID',
         secret: config_server.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
-        // cookie: { secure: true }
+            cookie: {
+            secure: true,
+            httpOnly: true
+        }
     }))
     app.use(body_parser.urlencoded({
         extended: false
@@ -44,7 +52,7 @@ let middleware = function(app) {
     app.use(ContentTypeMiddleware);
     app.use(EmptyContentMiddleware);
     app.use(LocationMiddleware);
-    //app.use(CsrfMiddleware);
+    app.use(CsrfMiddleware);
 
 }
 
