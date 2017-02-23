@@ -31,7 +31,7 @@ let UserController = function() {
                             callback(error);
                         }
                         callback(null, UserTransformer.transform(new_user));
-                        Email.welcome(new_user);
+                        Email.welcome(new_user);// send welcome email to user
                         return UserTransformer.transform(new_user);
                     });
                 }

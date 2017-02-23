@@ -95,7 +95,7 @@ router.post( '/register', (req, res) => {
 			res.json({
 				code: 200,
 				message: 'success',
-				// user: user
+				user: user
 			});
 		}
 	});

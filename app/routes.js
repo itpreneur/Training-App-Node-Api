@@ -8,7 +8,8 @@ import UsersServiceRoutes from 'app/services/training/routes/common';
 import AuthServiceRoutes from 'app/services/auth/routes';
 import ValidAuthTokenMiddleware from 'app/global/middlewares/ValidAuthToken';
 import DefaultServiceRoutes from 'app/services/default/routes';
-
+import PaymentServiceRoutes from 'app/services/payment/routes'
+import RegisterServiceRoutes from 'app/services/register/routes'
 
 let routes = function(app) {
 
@@ -20,12 +21,9 @@ let routes = function(app) {
     // user training routes
     app.use('/training', ValidAuthTokenMiddleware, TrainingServiceRoutes);
     app.use('/webinar', ValidAuthTokenMiddleware, WebinarServiceRoutes);
-    //  app.use( '/payments', ValidAuthTokenMiddleware, PaymentServiceRoutes );
-    //  app.use( '/bookings', ValidAuthTokenMiddleware, BookingServiceRoutes );
-    //  app.use( '/hosts', ValidAuthTokenMiddleware, HostsServiceRoutes );
-    //  app.use( '/messages', ValidAuthTokenMiddleware, MessageServiceRoutes );
-    //  app.use( '/dealmaker', ValidAuthTokenMiddleware, DealmakerServiceRoutes );
-    //  app.use( '/dummy', DummyServiceRoutes );
+    app.use( '/payment', ValidAuthTokenMiddleware, PaymentServiceRoutes );
+    app.use( '/registration', ValidAuthTokenMiddleware, RegisterServiceRoutes );
+    //app.use( '/messages', ValidAuthTokenMiddleware, MessageServiceRoutes );
     app.use('/', DefaultServiceRoutes);
 }
 

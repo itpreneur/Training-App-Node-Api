@@ -1,23 +1,23 @@
 'use strict';
 
 import Register from '../model/registration';
-import RegisterTransformer from '../transformer/RegisterTransformer';
+import RegisterTransformerAPI from '../transformer/RegisterTransformer';
 
 
-let RegisterTransformerAPI = {
-    create: (user_id, event, callback) => {
-        let new_event = new Event({
+let RegisterController= {
+    create: (user_id, training, callback) => {
+        let new_register = new Register({
             user: user_id,
-            title: event.title,
-            description: event.description,
-            date: event.date,
-            duration: event.duration,
-            location: event.location,
-            type: event.type,
-            venue_type: event.venue_type,
+            title: training.title,
+            description: training.description,
+            date: training.date,
+            duration: training.duration,
+            location: training.location,
+            type: training.type,
+            venue_type: training.venue_type,
             geo: {
-                lat: event.geo.lat || 0,
-                lng: event.geo.lng || 0,
+                lat: training.geo.lat || 0,
+                lng: training.geo.lng || 0,
             },
             steps: {
                 general: true,
@@ -31,16 +31,16 @@ let RegisterTransformerAPI = {
             }
 
         });
-        new_event.save((error, createdEvent) => {
+        new_register.save((error, createdTraining) => {
             if (error) {
                 callback(error);
                 return null;
             }
-            callback(null, RegisterTransformerAPI.transform(createdEvent));
-            return RegisterTransformerAPI.transform(createdEvent);
+            callback(null, RegisterTransformerAPI.transform(createdTraining));
+            return RegisterTransformerAPI.transform(createdTraining);
         });
     }
 }
 
 
-export default RegisterTransformerAPI;
+export default RegisterController;

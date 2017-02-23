@@ -24,16 +24,16 @@ let RegisterTransformer = {
         return {
             id: record._id,
             user: record.user,
-            event: {
-                id: record.event.id,
-                title: record.event.title,
-                location: record.event.location,
-                currency: record.event.booking.price.currency,
-                date: record.event.date,
+            training: {
+                id: record.training.id,
+                title: record.training.title,
+                location: record.training.location,
+                currency: record.training.registration.price.currency,
+                date: record.training.date,
                 owner: {
-                    id: record.event.user._id,
-                    name: record.event.user.name,
-                    avatar: record.event.user.profile_picture ? Helper.avatarURL(record.event.user.profile_picture) : null,
+                    id: record.training.user._id,
+                    name: record.training.user.name,
+                    avatar: record.training.user.profile_picture ? Helper.avatarURL(record.event.user.profile_picture) : null,
                 },
             },
             total_guests: record.total_guests,

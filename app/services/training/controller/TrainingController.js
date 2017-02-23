@@ -5,19 +5,19 @@ import TrainingTransformer from '../transformer/TrainingTransformer';
 
 
 let TrainingController = {
-    create: (user_id, event, callback) => {
-        let new_event = new Event({
+    create: (user_id, training, callback) => {
+        let newTraining = new Training({
             user: user_id,
-            title: event.title,
-            description: event.description,
-            date: event.date,
-            duration: event.duration,
-            location: event.location,
-            type: event.type,
-            venue_type: event.venue_type,
+            title: training.title,
+            description: training.description,
+            date: training.date,
+            duration: training.duration,
+            location: training.location,
+            type: training.type,
+            venue_type: training.venue_type,
             geo: {
-                lat: event.geo.lat || 0,
-                lng: event.geo.lng || 0,
+                lat: training.geo.lat || 0,
+                lng: training.geo.lng || 0,
             },
             steps: {
                 general: true,
@@ -31,7 +31,7 @@ let TrainingController = {
             }
 
         });
-        new_event.save((error, createdEvent) => {
+        newTraining.save((error, createdEvent) => {
             if (error) {
                 callback(error);
                 return null;
@@ -41,8 +41,8 @@ let TrainingController = {
         });
     },
 
-    update: (user_id, event_id, data, callback) => {
-        Event.findOne({ _id: event_id, user: user_id }, (error, event) => {
+    update: (user_id, training_id, data, callback) => {
+        Event.findOne({ _id: training_id, user: user_id }, (error, event) => {
             if (error) { console.log('error', error); }
             if (event) {
 
@@ -147,8 +147,8 @@ let TrainingController = {
 
     },
 
-    deleteImage: (user_id, event_id, filename, callback) => {
-        Event.findOne({ _id: event_id, user: user_id }, (error, event) => {
+    deleteImage: (user_id, training_id, filename, callback) => {
+        Event.findOne({ _id: training_id, user: user_id }, (error, event) => {
             if (event) {
 
                 let images = event.images;

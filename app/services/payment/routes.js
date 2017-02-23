@@ -3,8 +3,8 @@
 import express from 'express';
 import braintree from 'braintree';
 
-import BookingController from 'app/services/user/controllers/BookingController';
-import PaymentController from 'app/services/user/controllers/PaymentController';
+import RegisterController from 'app/services/training/controller/RegisterController';
+import PaymentController from 'app/services/training/controller/PaymentController';
 
 
 let router = express.Router();
@@ -62,7 +62,7 @@ router.post( '/braintree/nonce', (req, res) => {
 					// provide meta details.
 				}
 
-				BookingController.create( booking_data, ( error, booking ) => {
+				RegisterController.create( booking_data, ( error, booking ) => {
 
 					let payment_data = {
 						user: req.user.id,
@@ -79,7 +79,7 @@ router.post( '/braintree/nonce', (req, res) => {
 					PaymentController.create( payment_data, ( payment_error, payment ) => {
 						booking.payment = payment.id;
 						res.json({ code: 200, message: 'success.', booking: booking });
-						BookingController.update( req.user.id, booking.id, { payment: payment.id } );
+					//	RegisterController.update( req.user.id, booking.id, { payment: payment.id } );
 					});
 
 				})
