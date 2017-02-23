@@ -12,9 +12,7 @@ let UserController = function() {
             callback('invalid data provided');
             return;
         } else {
-
             User.find({ 'email': user.email }, (error, existing_user) => {
-
                 if (existing_user.length != 0) {
                     callback('User with this email address already exists.');
                 } else {
@@ -36,11 +34,8 @@ let UserController = function() {
                     });
                 }
             });
-
         }
-
     }
-
     function registerSocial(user, callback) {
 
         User.findOne({ 'email': user.email }, (error, existing_user) => {
@@ -64,9 +59,7 @@ let UserController = function() {
                 });
             }
         });
-
     }
-
     function resetPassword(email, callback) {
 
         User.findOne({ 'email': email }, (error, found_user) => {
@@ -88,11 +81,7 @@ let UserController = function() {
                 callback('invalid email provided');
             }
         });
-
     }
-
-
-
     function update(id, data, callback) {
         User.findById(id, (error, user) => {
             if (user) {
@@ -153,15 +142,11 @@ let UserController = function() {
             }
         });
     }
-
     return {
         registerDefault: registerDefault,
         registerSocial: registerSocial,
         resetPassword: resetPassword,
         update: update
     }
-
 }
-
-
 export default new UserController();

@@ -10,8 +10,6 @@ import MessageTransformer from 'app/services/training/transformer/MessageTransfo
 
 let router = express.Router();
 
-
-
 router.get('/', (req, res) => {
 	Message.find({
 				$or:[
@@ -57,13 +55,7 @@ router.get('/:id/flag', (req, res) => {
 
 		}
 	});
-
-
-
 });
-
-
-
 router.get('/registration/:id', (req, res) => {
 	Message.find({ registration: req.params.id })
 			.sort({ created_at: 1 })
@@ -78,12 +70,7 @@ router.get('/registration/:id', (req, res) => {
 					messages: messages
 				});
 			});
-
 });
-
-
-
-
 router.post('/', (req, res) => {
 	let data = req.body;
 	data.from = req.user.id;
@@ -92,8 +79,6 @@ router.post('/', (req, res) => {
 		if ( error ) {
 			res.json( ResponseTemplate.updateErrorOccoured(error) );
 		} else {
-
-
 		Message.findById(message.id)
 				.populate('from')
 				.populate('to')

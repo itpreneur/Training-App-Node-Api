@@ -40,7 +40,6 @@ let TrainingController = {
             return TrainingTransformer.transform(createdEvent);
         });
     },
-
     update: (user_id, training_id, data, callback) => {
         Event.findOne({ _id: training_id, user: user_id }, (error, event) => {
             if (error) { console.log('error', error); }
@@ -61,7 +60,6 @@ let TrainingController = {
                         lat: data.geo.lat,
                     }
                 }
-
                 if (data.menu && Object.keys(data.menu).length > 0) {
                     event.menu = {
                         starter: data.menu.starter || '',
@@ -91,8 +89,6 @@ let TrainingController = {
                     }
                     event.steps = Object.assign({}, event.steps, { booking: true });
                 }
-
-
                 if (data.additional && Object.keys(data.additional).length > 0) {
                     event.additional = {
                         recurring: {
@@ -130,8 +126,6 @@ let TrainingController = {
                         approved_timestamp: new Date(),
                     }
                 }
-
-
                 event.save(function(err, event) {
                     if (err) {
                         callback('error occoured while updating event');
@@ -144,9 +138,7 @@ let TrainingController = {
                 callback('event not found');
             }
         });
-
     },
-
     deleteImage: (user_id, training_id, filename, callback) => {
         Event.findOne({ _id: training_id, user: user_id }, (error, event) => {
             if (event) {
@@ -174,6 +166,4 @@ let TrainingController = {
         });
     }
 }
-
-
 export default TrainingController;

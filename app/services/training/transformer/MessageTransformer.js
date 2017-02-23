@@ -20,9 +20,6 @@ let MessageTransformer = {
 		}
 
 	},
-
-
-
 	_transform: ( record, extras=null ) => {
 		if ( ! record ) { return {}; }
 		let record_status = ( record.status === 1 ) ? 'active' : 'disabled';
@@ -96,13 +93,6 @@ let MessageTransformer = {
 			flagged: message_flagged,
 			timestamp: record.created_at,
 		};
-	},
-
-
-
-
+	}
 }
-
-
-
 export default MessageTransformer;

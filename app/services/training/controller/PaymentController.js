@@ -6,7 +6,6 @@ import PaymentTransformer from '../transformer/PaymentTransformer';
 
 
 let PaymentController = {
-
 	create: (data, callback = null) => {
 		let newPayment = new Payment({
 			user: data.user,

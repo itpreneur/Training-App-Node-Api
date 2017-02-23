@@ -23,13 +23,7 @@ let ReviewController = {
             }
             return ReviewTransformer.transform(record);
         });
-
     },
-
-
-
-
-
     createNew: (data, callback = null) => {
         let user_rating = (data.cleanliness + data.communication + data.rules) / 3;
 
