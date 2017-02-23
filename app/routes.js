@@ -1,6 +1,6 @@
 // Application routes
 
-import DummyServiceRoutes from 'app/services/dummy/routes';
+import DummyServiceRoutes from 'app/services/fake/routes';
 import express from 'express';
 import TrainingServiceRoutes from 'app/services/training/routes/training';
 import WebinarServiceRoutes from 'app/services/training/routes/webinar';
@@ -17,13 +17,13 @@ let routes = function(app) {
     // user auth login routes
     app.use('/auth', AuthServiceRoutes);
     // user service routes
-    app.use('/users',ValidAuthTokenMiddleware, UsersServiceRoutes);
+    app.use('/users', UsersServiceRoutes);
     // user training routes
     app.use('/training', ValidAuthTokenMiddleware, TrainingServiceRoutes);
     app.use('/webinar', ValidAuthTokenMiddleware, WebinarServiceRoutes);
     app.use( '/payment', ValidAuthTokenMiddleware, PaymentServiceRoutes );
     app.use( '/registration', ValidAuthTokenMiddleware, RegisterServiceRoutes );
-    //app.use( '/messages', ValidAuthTokenMiddleware, MessageServiceRoutes );
+    app.use( '/fake', DummyServiceRoutes );
     app.use('/', DefaultServiceRoutes);
 }
 

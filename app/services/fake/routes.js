@@ -9,21 +9,37 @@ import UserController from 'app/services/training/controller/UserController';
 import TrainingController from 'app/services/training/controller/TrainingController';
 import WebinarController from 'app/services/training/controller/WebinarController';
 
+
 let router = express.Router();
+
+
+
 
 router.get('/', (req, res) => {
 	res.json({
 		code: 200,
 		message: 'success',
 		actions: [
-			{ url: Helper.resource('/dummy/create-user'), description: 'create dummy user' },
-			{ url: Helper.resource('/dummy/create-trainer'), description: 'create dummy trainers' },
-			{ url: Helper.resource('/dummy/create-training'), description: 'create dummy trainings' },
+			{ url: Helper.resource('/dummy/create-guests'), description: 'create dummy guests' },
+			{ url: Helper.resource('/dummy/create-hosts'), description: 'create dummy hosts' },
+			{ url: Helper.resource('/dummy/create-events'), description: 'create dummy events' },
 		]
 	});
 });
 
-router.get('/create-user', (req, res) => {
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/create-hosts', (req, res) => {
 	let hosts = [];
 	let max = 1;
 

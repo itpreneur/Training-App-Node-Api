@@ -41,20 +41,20 @@ router.get('/', (req, res) => {
 					{ name: 'instagram', url: Helper.resource('/auth/login/instagram') },
 				],
 			},
-			{ resource: 'dummy', status: 'in development', url: Helper.resource('/dummy') },
+			{ resource: 'fake', status: 'in development', url: Helper.resource('/fake') },
 			{
-				resource: 'events',
+				resource: 'training',
 				status: 'in development',
-				url: Helper.resource('/events'),
+				url: Helper.resource('/training'),
 			},
 			{
-				resource: 'allakarte',
+				resource: 'webinar',
 				status: 'in development',
-				url: Helper.resource('/allakarte'),
+				url: Helper.resource('/webinar'),
 			},
 			{ resource: 'payments', status: 'in development', url: Helper.resource('/payments') },
-			{ resource: 'bookings', status: 'in development', url: Helper.resource('/bookings') },
-			{ resource: 'hosts', status: 'in development', url: Helper.resource('/hosts') },
+			{ resource: 'registration', status: 'in development', url: Helper.resource('/registration') },
+			{ resource: 'training', status: 'in development', url: Helper.resource('/training') },
 
 		]
 	})

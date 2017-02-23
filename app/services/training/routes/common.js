@@ -14,6 +14,7 @@ import config_server from 'app/config/server';
 // let upload = multer({ dest: path.join( config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR ) });
 
 import Twilio from 'app/helper/Twilio';
+
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, path.join(config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR));
@@ -159,8 +160,6 @@ router.get('/verify-phone', (req, res) => {
  * @api {GET} /users/:id find User By ID
  * @apiName findById
  * @apiGroup User
- *
- *
  * @apiSuccess {String} code HTTP status code from API.
  * @apiSuccess {String} message Message from API.
  */
@@ -184,12 +183,9 @@ router.get('/:id', (req, res) => {
  * @api {POST} /users/:id update user
  * @apiName findById
  * @apiGroup User
- *
- *
  * @apiSuccess {String} code HTTP status code from API.
  * @apiSuccess {String} message Message from API.
  */
-// update user details
 router.post('/update', (req, res) => {
     UserController.update(req.user._id, req.body, (error, user) => {
         if (error) {
