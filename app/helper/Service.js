@@ -4,8 +4,6 @@ import UserModel from 'app/services/training/model/user';
 import UserController from 'app/services/training/controller/UserController';
 import UserTransformer from 'app/services/training/transformer/UserTransformer';
 
-
-
 class user_service {
 
 	static findById(id, callback) {
@@ -17,8 +15,6 @@ class user_service {
 			}
 		});
 	}
-
-
 	static findOne(options, callback) {
 		UserModel.findOne( options, (error, user) => {
 			if (error) {

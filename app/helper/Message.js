@@ -4,7 +4,6 @@ import Censoring from 'censoring';
 
 
 let Message = {
-
 	sanityCheck( text ) {
 		let output = '';
 
@@ -18,25 +17,7 @@ let Message = {
 		} else { output = text; }
 
 		return output;
-	},
-
-
-
-
-
-
-
+	}
 }
 
-
-
-
-
-
-
-
-
-
 export default Message;
-
-

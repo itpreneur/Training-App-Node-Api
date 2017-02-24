@@ -20,14 +20,7 @@ let transport = nodemailer.createTransport(mandrillTransport({
 		apiKey: config.mandrillapp.apiKey
 	}
 }));
-
-
-
-
-
-
 let Email = {
-
 
 	welcome( user ) {
 		if ( user.email ) {
@@ -48,12 +41,6 @@ let Email = {
 			});
 		}
 	},
-
-
-
-
-
-
 	password_reset( user, password ) {
 		if ( user.email ) {
 			let templateDir = path.join('app/global/templates', 'emails', 'password-reset-email');
@@ -78,16 +65,6 @@ let Email = {
 		}
 
 	},
-
-
-
-
-
-
-
-
-
-
 	event_booked_guest( event, guest, booking ) {
 		if ( guest.email ) {
 			let templateDir = path.join('app/global/templates', 'emails', 'event-booked-guest-email');
@@ -118,11 +95,6 @@ let Email = {
 		}
 
 	},
-
-
-
-
-
 	event_booked_guests_notification( guest, event, booking ) {
 		if ( event.user.email ) {
 			let templateDir = path.join('app/global/templates', 'emails', 'event-booked-guests-notification-email');
@@ -214,12 +186,6 @@ let Email = {
 		}
 
 	},
-
-
-
-
-
-
 	guest_review_email( data ) {
 		if ( data.user.email ) {
 			let templateDir = path.join('app/global/templates', 'emails', 'guest-review-email');
@@ -249,23 +215,6 @@ let Email = {
 		if ( data.user.phone_verified ) {
 			Twilio.leave_review( data.user.phone );
 		}
-
-
-	},
-
-
-
-
-
-
-
-
-
-
-
+	}
 }
-
-
 export default Email;
-
-

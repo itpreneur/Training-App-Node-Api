@@ -8,15 +8,11 @@ import axios from 'axios';
 let _geo = {};
 
 let Default = {
-
-
 	set(req, location) {
 		if ( location ) {
 			req.session.location = location;
 		}
 	},
-
-
 	done( req, callback ) {
 		if ( req.session.location && req.session.location.lng && req.session.location.lat ) {
 			callback(req.session.location);
@@ -27,12 +23,7 @@ let Default = {
 			});
 		}
 	},
-
-
-
-
 	autodetect( req, callback ) {
-
 		return axios.get(`${api_config.ip.url}`)
 			.then( (response) => {
 				let location = response.data.loc;
@@ -56,16 +47,12 @@ let Default = {
 			});
 
 	},
-
-
-
 	getMaxDistance() {
 		let maxDistance = server_config.GEO_RADIUS;
 		// return maxDistance * 1000;
 			maxDistance /= 6378; // 3963.2 miles, 6371 kilometers
 		return maxDistance;
-	},
-
+	}
 }
 
 
