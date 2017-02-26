@@ -26,6 +26,7 @@
   "dependencies": {
     "app-module-path": "1.1.0",
     "axios": "0.14.0",
+    "babel-cli": "^6.11.4",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.7",
     "body-parser": "1.15.2",
@@ -51,6 +52,7 @@
     "multer": "1.2.0",
     "nodemailer": "2.5.0",
     "nodemailer-mandrill-transport": "1.2.0",
+    "nodemon": "^1.11.0",
     "passport": "0.3.2",
     "passport-facebook": "2.1.1",
     "passport-google-oauth": "1.0.0",

@@ -5,7 +5,6 @@ let Response = {
     general(data) {
         return data;
     },
-
     error(code, message, description) {
         return {
             code: code || 400,
@@ -13,9 +12,6 @@ let Response = {
             description: description || 'error occoured on server, please try again after some time.',
         }
     },
-
-
-
     authError() {
         return Response.error(
             403,
@@ -23,7 +19,6 @@ let Response = {
             'no authentication token provided, please login first and provide the authentication token.'
         );
     },
-
     emptyContent() {
         return Response.general({
             code: 402,
@@ -32,8 +27,6 @@ let Response = {
             helpful_links: ['http://stackoverflow.com/questions/18419428/what-is-the-minimum-valid-json']
         });
     },
-
-
     invalidContentType() {
         return Response.general({
             code: 400,
@@ -42,8 +35,6 @@ let Response = {
             helpful_links: ['http://stackoverflow.com/questions/477816/what-is-the-correct-json-content-type']
         });
     },
-
-
     routeNotFound() {
         return Response.error(
             405,
@@ -51,7 +42,6 @@ let Response = {
             'the resource your tried to access doesn\'t exist or you dont have permissions to access it.'
         );
     },
-
     userNotFound() {
         return Response.error(
             400,
@@ -59,8 +49,6 @@ let Response = {
             "the user you're looking for doesn't exist or you dont have permissions to access it."
         );
     },
-
-
     updateErrorOccoured(error) {
         return Response.error(
             301,
@@ -68,27 +56,13 @@ let Response = {
             error || "error occoured while updating your data."
         );
     },
-
-
-
-
-
-
     success(description, data = null) {
         return {
             code: 200,
             message: 'success',
             description: description || 'data successfully saved'
         }
-    },
-
-
-
-
-
-
-
-
+    }
 }
 
 export default Response;
