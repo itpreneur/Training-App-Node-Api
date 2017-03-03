@@ -9,7 +9,7 @@ import MongoConnect from 'app/mongoose';
 import AppRoutes from 'app/routes';
 import AppMiddleware from 'app/middleware';
 import express from 'express';
-import winstom from 'winston'
+import winston from 'winston'
 
 let app = express();
 //---------------------------------------------//
@@ -24,7 +24,7 @@ let server = app.listen(
     () => {
         const port = server.address().port;
         console.log(`Ubmas API running at http://localhost:${port}`);
-        winston.log(`gennext API running at http://localhost:${port}`)
+        winston.log('info',`gennext API running at http://localhost:${port}`);
     }
 );
 export default app;
