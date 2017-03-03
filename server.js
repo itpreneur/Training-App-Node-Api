@@ -24,6 +24,7 @@ let server = app.listen(
     () => {
         const port = server.address().port;
         console.log(`Ubmas API running at http://localhost:${port}`);
+        winston.log(`gennext API running at http://localhost:${port}`)
     }
 );
 export default app;
