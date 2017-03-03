@@ -9,7 +9,7 @@ import MongoConnect from 'app/mongoose';
 import AppRoutes from 'app/routes';
 import AppMiddleware from 'app/middleware';
 import express from 'express';
-
+import winstom from 'winston'
 
 let app = express();
 //---------------------------------------------//
@@ -19,7 +19,6 @@ new AppMiddleware(app);
 new AppRoutes(app, express);
 
 //---------------------------------------------//
-
 let server = app.listen(
     app.get('port'),
     () => {
