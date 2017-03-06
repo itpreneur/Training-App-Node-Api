@@ -5,13 +5,11 @@ import User from '../app/services/training/model/user';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../server';
-
 let should = chai.should();
-
 chai.use(chaiHttp);
 
-describe('Users', () => {
 
+describe('Users', () => {
     beforeEach((done) => {
         User.remove({}, (err) => {
             done();
