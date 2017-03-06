@@ -1,10 +1,10 @@
 process.env.NODE_ENV = 'test';
 
 import mongoose from 'mongoose';
-import Training from '../app/services/training/model/training';
+import Training from '../../app/services/training/model/training';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../server';
+import server from '../../server';
 
 let should = chai.should();
 

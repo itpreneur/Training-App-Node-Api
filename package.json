@@ -8,12 +8,10 @@
     "test": " mocha 'test/**/*.js' --timeout 10000  --compilers js:babel-core/register",
     "lint": "jshint --exclude ./node_modules/*.js *.js **/*.js",
     "deploy": "nodemon server.js --exec babel-node --presets es2015,stage-2",
-    "start": "nodemon server.js --exec babel-node --presets es2015,stage-2",
     "prestart": "npm run test",
     "test:watch": "npm t -- -w",
     "docs": "apidoc -i app/ -o apidoc/",
     "coverage": "istanbul cover -x *.Spec.js _mocha -- -R spec test/**/*.js --timeout 10000 --compilers js:babel-core/register"
-
   },
   "author": "TARUN",
   "license": "MIT",
@@ -73,6 +71,6 @@
     "superagent-promise": "^1.1.0",
     "twilio": "2.11.1",
     "validator": "5.5.0",
-    "winston" : "*"
+    "winston": "^2.3.1"
   }
 }
