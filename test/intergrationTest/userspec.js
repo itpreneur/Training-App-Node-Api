@@ -15,7 +15,6 @@ describe('Users', () => {
             done();
         });
     });
-
     describe('/GET Users', () => {
         it('it should GET all the users', (done) => {
             chai.request(server)
