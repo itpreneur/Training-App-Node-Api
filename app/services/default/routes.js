@@ -12,10 +12,7 @@ import axios from 'axios';
 // import requestIP from 'request-ip';
 import _ from 'lodash';
 
-
 let router = express.Router();
-
-
 // default / get route
 router.get('/', (req, res) => {
 	res.json({

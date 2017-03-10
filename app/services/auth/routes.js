@@ -164,8 +164,9 @@ router.post( '/reset-password', (req, res) => {
 	}
 	else {
 		UserController.resetPassword( req.body.email, ( error, success) => {
+			console.log(error)
 			if ( error ) {
-				res.json({ code: 205, message: 'error', description: 'error occoured while resetting password' });
+				res.json({ code: 205, message: error, description: 'error occoured while resetting password' });
 			} else {
 				res.json({
 					code: 200,

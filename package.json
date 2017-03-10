@@ -6,12 +6,13 @@
   "scripts": {
     "start": "nodemon server.js --exec babel-node --presets es2015,stage-2",
     "test": " mocha 'test/**/*.js' --timeout 10000  --compilers js:babel-core/register",
+    "pretest" :"npm run coverage",
     "lint": "jshint --exclude ./node_modules/*.js *.js **/*.js",
-    "deploy": "nodemon server.js --exec babel-node --presets es2015,stage-2",
+    "deploy": "npm run test && npm run start",
     "prestart": "npm run test",
     "test:watch": "npm t -- -w",
     "docs": "apidoc -i app/ -o apidoc/",
-    "coverage": "istanbul cover -x *.Spec.js _mocha -- -R spec test/**/*.js --timeout 10000 --compilers js:babel-core/register"
+    "coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- -R spec test/**/*.js --timeout 10000 --compilers js:babel-core/register"
   },
   "author": "TARUN",
   "license": "MIT",
@@ -33,6 +34,7 @@
     "app-module-path": "1.1.0",
     "axios": "0.14.0",
     "babel-cli": "^6.11.4",
+    "babel-istanbul": "^0.12.2",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.7",
     "body-parser": "1.15.2",
@@ -50,6 +52,7 @@
     "faker": "3.1.0",
     "helmet": "^3.4.0",
     "immutable": "3.8.1",
+    "istanbul": "^0.4.5",
     "jsonwebtoken": "7.1.9",
     "lodash": "4.15.0",
     "marked": "0.3.6",
