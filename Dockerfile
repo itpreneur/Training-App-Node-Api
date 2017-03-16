@@ -1,9 +1,8 @@
-# create a file named Dockerfile
-FROM node:argon
+FROM node:4-onbuild
+# replace this with your application's default port
 RUN mkdir /app
-WORKDIR /app
 COPY package.json /app
 RUN npm install
 COPY . /app
-EXPOSE 2233
-CMD ["npm", "start"]
+EXPOSE 8080
+CMD [ "npm", "start" ]

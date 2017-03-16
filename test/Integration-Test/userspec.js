@@ -85,22 +85,4 @@ describe('Users', () => {
                 });
         });
     });
-    describe('/POST reset password User', () => {
-        it('it should not POST a user to reset password', (done) => {
-            let user = {
-                email: "123456@gmail.com",
-            }
-            chai.request(server)
-                .post('/auth/reset-password')
-                .send(user)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('message');
-
-                    done();
-                });
-        });
-
-    });
 });
