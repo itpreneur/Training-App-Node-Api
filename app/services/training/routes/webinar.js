@@ -11,8 +11,12 @@ import config_server from 'app/config/server';
 let router = express.Router();
 // list all Webinar
 router.get('/', (req, res) => {
-    Webinar.find({ user: req.user.id }, (error, Webinar) => {
-        if (error) { res.send(error); }
+    Webinar.find({
+        user: req.user.id
+    }, (error, Webinar) => {
+        if (error) {
+            res.send(error);
+        }
         Webinar = WebinarTransformer.transform(Webinar);
         res.json({
             code: 200,
@@ -29,7 +33,9 @@ router.post('/', (req, res) => {
             res.json(ResponseTemplate.updateErrorOccoured(error));
         } else {
             res.json(ResponseTemplate.success(
-                'new dish has been successfully added', { Webinar: Webinar }));
+                'new dish has been successfully added', {
+                    Webinar: Webinar
+                }));
         }
     });
 });

@@ -18,8 +18,12 @@ let TrainingTransformer = {
         }
     },
     _transform: (training) => {
-        if (!training) { return {}; }
-        if (!training._id && training.obj) { training = training.obj; }
+        if (!training) {
+            return {};
+        }
+        if (!training._id && training.obj) {
+            training = training.obj;
+        }
         let training_status = (training.status === 1) ? 'active' : 'disabled';
         let training_images = [];
         if (training.images) {
@@ -53,7 +57,9 @@ let TrainingTransformer = {
             booking: training.register || {},
             additional: training.additional || {},
             steps: training.steps,
-            meta: training.meta || { approved: false },
+            meta: training.meta || {
+                approved: false
+            },
             register: registrations,
             geo: training.geo || {},
             resource_url: Helper.resource(`/training/${training._id}`),
@@ -71,7 +77,9 @@ let TrainingTransformer = {
         }
     },
     _transformTrainingForTrainer: (event) => {
-        if (!event) { return {}; }
+        if (!event) {
+            return {};
+        }
         let event_status = (event.status === 1) ? 'active' : 'disabled';
         let event_images = [];
         if (event.images) {

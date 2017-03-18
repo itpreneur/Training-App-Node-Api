@@ -6,11 +6,23 @@ import UserHelper from '../../../helper/User';
 const UserSchema = mongoose.Schema({
         provider: String,
         name: String,
-        email: { type: String, lowercase: true, required: true },
+        email: {
+            type: String,
+            lowercase: true,
+            required: true
+        },
         password: String,
-        birthday: { type: Date },
-        status: { type: Number, default: 1 },
-        type: { type: Number, default: 1 }, // 1: normal user, 2: trainer
+        birthday: {
+            type: Date
+        },
+        status: {
+            type: Number,
+            default: 1
+        },
+        type: {
+            type: Number,
+            default: 1
+        }, // 1: normal user, 2: trainer
         profile_picture: String,
         phone: String,
         email_verified: Boolean,
@@ -24,7 +36,10 @@ const UserSchema = mongoose.Schema({
     },
 
     {
-        timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at'
+        }
     },
 
 );
@@ -36,9 +51,9 @@ UserSchema.virtual('training', {
 });
 
 UserSchema.virtual('reviews', {
-	ref: 'Review',
-	localField: '_id',
-	foreignField: 'trainer'
+    ref: 'Review',
+    localField: '_id',
+    foreignField: 'trainer'
 });
 // arrow functions doesn't work well with mongoose due to its implementation of methods.
 UserSchema.methods.comparePassword = function(password) {

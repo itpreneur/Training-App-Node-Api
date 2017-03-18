@@ -23,14 +23,27 @@ let WebinarController = {
         });
     },
     update: (user_id, webinar_id, data, callback) => {
-        Webinar.findOne({ _id: webinar_id, user: user_id }, (error, webinarData) => {
+        Webinar.findOne({
+            _id: webinar_id,
+            user: user_id
+        }, (error, webinarData) => {
             if (webinarData) {
 
-                if (data.title) { webinarData.title = data.title; }
-                if (data.description) { webinarData.description = data.description; }
-                if (data.price) { webinarData.price = data.price; }
-                if (data.register_time) { webinarData.register_time = data.register_time; }
-                if (data.register_type) { webinarData.register_type = data.register_type; }
+                if (data.title) {
+                    webinarData.title = data.title;
+                }
+                if (data.description) {
+                    webinarData.description = data.description;
+                }
+                if (data.price) {
+                    webinarData.price = data.price;
+                }
+                if (data.register_time) {
+                    webinarData.register_time = data.register_time;
+                }
+                if (data.register_type) {
+                    webinarData.register_type = data.register_type;
+                }
 
                 webinarData.save(function(err, webinar) {
                     if (err) {

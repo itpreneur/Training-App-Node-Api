@@ -19,7 +19,9 @@ let RegisterTransformer = {
         }
     },
     _transform: (record) => {
-        if (!record) { return {}; }
+        if (!record) {
+            return {};
+        }
         let record_status = (record.status === 1) ? 'active' : 'disabled';
         return {
             id: record._id,
@@ -56,7 +58,9 @@ let RegisterTransformer = {
         }
     },
     _transformForTrainer: (record) => {
-        if (!record) { return {}; }
+        if (!record) {
+            return {};
+        }
         let record_status = (record.status === 1) ? 'active' : 'disabled';
         let transformed_user = UserTransformer.transformTrainer(record.user);
         return {

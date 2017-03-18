@@ -29,7 +29,6 @@ let RegisterController= {
             meta: {
                 approved: false
             }
-
         });
         new_register.save((error, createdTraining) => {
             if (error) {

@@ -33,21 +33,16 @@ passport.use(new LocalStrategy(
 	}
 
 ));
-
-
 let LocalRoutes = {
-
 	authenticate: () => {
 		return passport.authenticate('local', { session: false });
 	},
-
 	authenticate_with_callback: () => {
 		return passport.authenticate('local', {
 			successRedirect: '/auth/success',
 			failureRedirect: '/auth/failed'
 		});
 	},
-
 }
 
 
@@ -55,5 +50,3 @@ let LocalRoutes = {
 
 
 export default LocalRoutes;
-
-

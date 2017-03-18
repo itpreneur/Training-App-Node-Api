@@ -17,7 +17,9 @@ let ReviewTransformer = {
 
     },
     _transform: (record) => {
-        if (!record) { return {}; }
+        if (!record) {
+            return {};
+        }
         let record_status = (record.status === 1) ? 'active' : 'disabled';
         let trainer = record.trainer;
         if (trainer && trainer.id) {

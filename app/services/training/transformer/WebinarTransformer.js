@@ -19,7 +19,9 @@ let WebinarTransformer = {
         }
     },
     _transform: (data) => {
-        if (!data) { return {}; }
+        if (!data) {
+            return {};
+        }
         let data_status = (data.status === 1) ? 'active' : 'disabled';
 
         return {

@@ -19,7 +19,9 @@ let UserTransformer = {
         }
     },
     _transform: (user) => {
-        if (!user) { return {}; }
+        if (!user) {
+            return {};
+        }
         let user_status = (user.status === 1) ? 'active' : 'disabled';
 
         let host_documents = [];
@@ -66,7 +68,9 @@ let UserTransformer = {
     },
     _transformTrainer: (user) => {
 
-        if (!user) { return {}; }
+        if (!user) {
+            return {};
+        }
         let user_status = (user.status === 1) ? 'active' : 'disabled';
         let trainings = [];
         if (user.training) {
