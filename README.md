@@ -20,9 +20,7 @@ The application allows you to browse through a list of available courses and als
 REST API developed in Node and React is consuming those services with Redux as state manager.
 
 # Application dependancies
-
-javascript ```
-
+```javascript
 "babel-istanbul": "^0.12.2",
 "bcrypt-nodejs": "0.0.3",
 "bluebird": "^3.4.7",
