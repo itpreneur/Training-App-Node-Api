@@ -11,7 +11,6 @@ import PaymentServiceRoutes from 'app/services/payment/routes'
 import RegisterServiceRoutes from 'app/services/register/routes'
 
 let routes = function(app) {
-
     app.use('/uploads', express.static('uploads'));
     // user auth login routes
     app.use('/auth', AuthServiceRoutes);
