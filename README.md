@@ -63,3 +63,12 @@ REST API developed in Node and React is consuming those services with Redux as s
 "validator": "5.5.0",
 "winston": "^2.3.1"
 ```
+
+# Application Execution
+```javascript
+git clone https://github.com/tkssharma/Training-App-Node-Api.git
+npm install
+npm run start
+npm run test
+npm run coverage
+```
