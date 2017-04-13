@@ -8,9 +8,7 @@ import server from '../../server';
 var request = require('request');
 var expect = chai.expect;
 
-
 let should = chai.should();
-
 chai.use(chaiHttp);
 
 describe('Test User Login and Register', () => {
@@ -123,7 +121,6 @@ describe('Test User Login and Register', () => {
                 .post('/auth/register')
                 .send(user)
                 .end((err, res) => {
-                    console.log(res.body);
                     done();
                 });
         });
@@ -137,10 +134,24 @@ describe('Test User Login and Register', () => {
                 .post('/auth')
                 .send(user)
                 .end((err, res) => {
+                  token =  res.body.token;
                     expect(res.body.token).to.be.a('string');
                     expect(res.body.token).to.not.be.undefined;
                     done();
                 });
         });
+        /*  it('should be able to fetch trainings Data after login', function(done) {
+            chai.request(server)
+                .get('/training')
+                .set('authorization',token)
+                .end((err, res) => {
+                  console.log(res);
+                res.should.have.status(200);
+                res.body.should.be.a('object');
+                res.body.should.have.property('message');
+                //no authentication token provided, please login first and provide the authentication token.
+                done();
+              });
+        }); */
     });
 });

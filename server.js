@@ -24,6 +24,7 @@ let server = app.listen(
     () => {
         const port = server.address().port;
         winston.log('info', `GenNext API running at http://localhost:${port}`)
+        console.log('runing...')
     }
 );
 export default app;
