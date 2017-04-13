@@ -8,7 +8,7 @@ import User from '../model/user';
 let UserController = function() {
 
     function registerDefault(user, callback) {
-        if (!user.name || !user.email || !user.password || !user.verify_password) {
+        if (! user.name || ! user.email || ! user.password || ! user.verify_password) {
             callback('invalid data provided');
             return;
         } else {

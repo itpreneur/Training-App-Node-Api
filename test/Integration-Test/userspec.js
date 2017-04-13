@@ -43,10 +43,10 @@ describe('Users', () => {
     describe('/POST Register User', () => {
         it('it should not POST a user without pages field', (done) => {
             let user = {
-                name: "The Lord of the Rings",
-                password: "123456",
-                email: "123456@gmail.com",
-                varify_password: "123456"
+              "name": "tkssharma",
+              "password": "tkssharma",
+              "email": "tkssharma@gmail.com",
+              "verify_password": "tkssharma"
             }
             chai.request(server)
                 .post('/auth/register')
@@ -69,8 +69,8 @@ describe('Users', () => {
     describe('/POST Login User', () => {
         it('it should not POST a user without pages field', (done) => {
             let user = {
-                password: "123456",
-                email: "email@gmail.com",
+                "password": "tkssharma",
+                "email": "tkssharma@gmail.com",
             }
             chai.request(server)
                 .post('/auth')

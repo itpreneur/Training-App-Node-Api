@@ -15,16 +15,21 @@ chai.use(chaiHttp);
 
 describe('Test User Login and Register', () => {
 
+    beforeEach((done) => {
+        User.remove({}, (err) => {
+            done();
+        });
+    });
     /*
      * Test the /POST route for user register
      */
     describe('/POST Register User', () => {
         it('it should  POST a user and save in Database', (done) => {
             let user = {
-                name: "111",
-                password: "111",
-                email: "111@gmail.com",
-                varify_password: "111"
+                "name": "111",
+                "password": "111",
+                "email": "111@gmail.com",
+                "verify_password": "111"
             }
             chai.request(server)
                 .post('/auth/register')
@@ -42,11 +47,11 @@ describe('Test User Login and Register', () => {
     /*
      * Test the /POST route for login
      */
-    describe('/POST Register User', () => {
+    describe('/POST Login User', () => {
         it('it should  POST a user and save in Database', (done) => {
             let user = {
-                password: "123456",
-                email: "123456@gmail.com",
+                "password": "123456",
+                "email": "123456@gmail.com",
             }
             chai.request(server)
                 .post('/auth')
@@ -101,22 +106,41 @@ describe('Test User Login and Register', () => {
     });
     describe('Auth Test for authorization token validation', function() {
         var token = null;
-        before(function(done) {
+        // make collection empty first
+        beforeEach((done) => {
+            User.remove({}, (err) => {
+                done();
+            });
+        });
+        beforeEach(function(done) {
+            let user = {
+                "name": "111",
+                "password": "111",
+                "email": "111@gmail.com",
+                "verify_password": "111"
+            }
             chai.request(server)
-                .post('/auth')
-                .send({
-                    "password": "111",
-                    "email": "111@gmail.com",
-                })
-                .end(function(err, res) {
-                    token = res.body.token; // Or something
+                .post('/auth/register')
+                .send(user)
+                .end((err, res) => {
+                    console.log(res.body);
                     done();
                 });
         });
-        it('should get a valid token for User', function(done) {
-                expect(token).to.be.a('string');
-                expect(token).to.not.be.undefined;
 
+        it('it should login a user and get Token in response', (done) => {
+            let user = {
+                "password": "111",
+                "email": "111@gmail.com",
+            }
+            chai.request(server)
+                .post('/auth')
+                .send(user)
+                .end((err, res) => {
+                    expect(res.body.token).to.be.a('string');
+                    expect(res.body.token).to.not.be.undefined;
+                    done();
+                });
         });
     });
 });

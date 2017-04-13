@@ -13,20 +13,6 @@ chai.use(chaiHttp);
 
 describe('Training', () => {
 
-  var token = null;
-  // should get token to validate further requests
-  before(function(done) {
-      chai.request(server)
-          .post('/auth')
-          .send({
-            	"email":"12345@gmail.com",
-            	"password" :  "12345"
-          })
-          .end(function(err, res) {
-              token = res.body.token; // Or something
-              done();
-          });
-  });
     describe('/GET Training', () => {
         it('it should GET all the Training', (done) => {
             chai.request(server)
@@ -59,10 +45,10 @@ describe('Training', () => {
     describe('/POST Register Training', () => {
         it('it should not POST a user without pages field', (done) => {
             let user = {
-                name: "The Lord of the Rings",
-                password: "123456",
-                email: "email@gmail.com",
-                varify_password: "123456"
+                "name": "2222",
+                "password": "122211",
+                "email": "2222@gmail.com",
+                "verify_password": "112221"
             }
             chai.request(server)
                 .post('/training/34awefsdw3rewd')
@@ -85,8 +71,8 @@ describe('Training', () => {
     describe('/POST Login Training', () => {
         it('it should not POST a user without pages field', (done) => {
             let user = {
-                password: "123456",
-                email: "email@gmail.com",
+                "password": "123456",
+                "email": "email@gmail.com",
             }
             chai.request(server)
                 .post('/auth')

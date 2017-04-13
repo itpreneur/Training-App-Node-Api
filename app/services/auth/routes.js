@@ -40,6 +40,27 @@ router.get( '/failed', (req, res) => {
 	res.json({ message: 'failed', login: false });
 });
 /**
+ * @api {POST} /auth/reset-password update password sent in Mail
+ * @apiName register
+ * @apiGroup Auth
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
+router.post( '/register', (req, res) => {
+	UserController.registerDefault( req.body, ( error, user ) => {
+		if ( error ) {
+			res.json({ code: 400, message: 'error', error: error });
+		}
+		else {
+			res.json({
+				code: 200,
+				message: 'success',
+				user: user
+			});
+		}
+	});
+});
+/**
  * @api {POST} /auth/ local auth
  * @apiName local login
  * @apiGroup Auth
@@ -48,7 +69,7 @@ router.get( '/failed', (req, res) => {
  */
 router.post('/', LocalRoutes.authenticate(),
 	( req, res ) => {
-		if ( ! req.user.name ) {
+		if ( ! req.user.email ) {
 			res.json({
 				code: 401,
 				message: 'error',
@@ -111,27 +132,7 @@ router.get('/login/instagram', InstagramRoutes.authenticate() );
 router.get( '/callback/instagram', InstagramRoutes.callback(), redirectSocialUser );
 
 
-/**
- * @api {POST} /auth/reset-password update password sent in Mail
- * @apiName register
- * @apiGroup Auth
- * @apiSuccess {String} code HTTP status code from API.
- * @apiSuccess {String} message Message from API.
- */
-router.post( '/register', (req, res) => {
-	UserController.registerDefault( req.body, ( error, user ) => {
-		if ( error ) {
-			res.json({ code: 400, message: 'error', error: error });
-		}
-		else {
-			res.json({
-				code: 200,
-				message: 'success',
-				user: user
-			});
-		}
-	});
-});
+
 /**
  * @api {GET} /auth/validate validate token with Middleware
  * @apiName validate
