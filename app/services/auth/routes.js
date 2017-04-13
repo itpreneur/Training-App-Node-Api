@@ -48,7 +48,7 @@ router.get( '/failed', (req, res) => {
  */
 router.post('/', LocalRoutes.authenticate(),
 	( req, res ) => {
-		if ( ! req.user.id ) {
+		if ( ! req.user.name ) {
 			res.json({
 				code: 401,
 				message: 'error',

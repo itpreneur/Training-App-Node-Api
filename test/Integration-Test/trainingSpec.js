@@ -5,19 +5,28 @@ import Training from '../../app/services/training/model/training';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import server from '../../server';
+var request = require('request');
 
 let should = chai.should();
-
+var expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Training', () => {
 
-    beforeEach((done) => {
-        Training.remove({}, (err) => {
-            done();
-        });
-    });
-
+  var token = null;
+  // should get token to validate further requests
+  before(function(done) {
+      chai.request(server)
+          .post('/auth')
+          .send({
+            	"email":"12345@gmail.com",
+            	"password" :  "12345"
+          })
+          .end(function(err, res) {
+              token = res.body.token; // Or something
+              done();
+          });
+  });
     describe('/GET Training', () => {
         it('it should GET all the Training', (done) => {
             chai.request(server)
