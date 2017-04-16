@@ -40,8 +40,7 @@ const UserSchema = mongoose.Schema({
             createdAt: 'created_at',
             updatedAt: 'updated_at'
         }
-    },
-
+    }
 );
 
 UserSchema.virtual('training', {
