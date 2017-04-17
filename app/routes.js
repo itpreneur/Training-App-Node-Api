@@ -17,7 +17,7 @@ let routes = function(app) {
     // user service routes
     app.use('/users', ValidAuthTokenMiddleware, UsersServiceRoutes);
     // user training routes
-    app.use('/training', ValidAuthTokenMiddleware, TrainingServiceRoutes);
+    app.use('/training', TrainingServiceRoutes);
     app.use('/webinar', ValidAuthTokenMiddleware, WebinarServiceRoutes);
     app.use('/payment', ValidAuthTokenMiddleware, PaymentServiceRoutes);
     app.use('/registration', ValidAuthTokenMiddleware, RegisterServiceRoutes);
