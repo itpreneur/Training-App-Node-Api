@@ -12,9 +12,10 @@ import path from 'path';
 import fs from 'fs';
 import config_server from 'app/config/server';
 // let upload = multer({ dest: path.join( config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR ) });
-
+// twillo API for messaging 
 import Twilio from 'app/helper/Twilio';
 
+// helper for doc upload
 let storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, path.join(config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR));
@@ -207,7 +208,15 @@ router.post('/upload-profile-picture', upload.single('avatar'), (req, res) => {
         }
     });
 });
-// upload host documents.
+/**
+ * @api {POST} /users/upload-documents upload
+ * @apiName upload-documents
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 router.post('/upload-documents', uploadDocuments.array('documents'), (req, res) => {
     let documents = {};
     req.files.map((file) => {
@@ -231,7 +240,15 @@ router.post('/upload-documents', uploadDocuments.array('documents'), (req, res) 
     });
 });
 
-// delete event image
+/**
+ * @api {POST} /users/delete-document upload
+ * @apiName delete-document
+ * @apiGroup User
+ *
+ *
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
 router.post('/delete-document', (req, res) => {
     UserController.deleteDocument(req.user.id, req.body.filename, (error, user) => {
         if (error) {
