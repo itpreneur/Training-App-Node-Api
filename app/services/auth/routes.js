@@ -39,8 +39,36 @@ router.get( '/success', (req, res) => {
 router.get( '/failed', (req, res) => {
 	res.json({ message: 'failed', login: false });
 });
+
 /**
- * @api {POST} /auth/reset-password update password sent in Mail
+ * @api {POST} /auth/ local auth
+ * @apiName local login
+ * @apiGroup Auth
+ * @apiSuccess {String} code HTTP status code from API.
+ * @apiSuccess {String} message Message from API.
+ */
+router.post('/login', LocalRoutes.authenticate(),
+	( req, res ) => {
+		if ( ! req.user.email ) {
+			res.json({
+				code: 401,
+				message: 'error',
+				error: req.user.error,
+			});
+		}
+		else {
+			let token = Helper.generateToken(req.user);
+			res.json({
+				code: 200,
+				message: 'success',
+				token: token
+			});
+		}
+	}
+);
+
+/**
+ * @api {POST} /auth/register 
  * @apiName register
  * @apiGroup Auth
  * @apiSuccess {String} code HTTP status code from API.
@@ -60,32 +88,6 @@ router.post( '/register', (req, res) => {
 		}
 	});
 });
-/**
- * @api {POST} /auth/ local auth
- * @apiName local login
- * @apiGroup Auth
- * @apiSuccess {String} code HTTP status code from API.
- * @apiSuccess {String} message Message from API.
- */
-router.post('/', LocalRoutes.authenticate(),
-	( req, res ) => {
-		if ( ! req.user.email ) {
-			res.json({
-				code: 401,
-				message: 'error',
-				error: req.user.error,
-			});
-		}
-		else {
-			let token = Helper.generateToken(req.user);
-			res.json({
-				code: 200,
-				message: 'success',
-				token: token
-			});
-		}
-	}
-);
 
 // send token to client side
 let redirectSocialUser = ( req, res ) => {

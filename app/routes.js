@@ -13,7 +13,7 @@ import RegisterServiceRoutes from 'app/services/register/routes'
 let routes = function(app) {
     app.use('/uploads', express.static('uploads'));
     // user auth login routes
-    app.use('/auth',ValidAuthTokenMiddleware, AuthServiceRoutes);
+    app.use('/auth', AuthServiceRoutes);
     // user service routes
     app.use('/users', ValidAuthTokenMiddleware, UsersServiceRoutes);
     // user training routes
