@@ -26,7 +26,7 @@ let router = express.Router();
 // list all trainings
 router.get('/', (req, res) => {
 
-    Training.find({ user: req.user.id })
+    Training.find({})
         .sort({ created_at: 1 })
         .populate('user')
         .populate('registration')
@@ -118,7 +118,7 @@ router.get('/:id', (req, res) => {
 
 // save new training
 router.post('/', (req, res) => {
-    TrainingController.create(req.user.id, req.body, (error, training) => {
+    TrainingController.create(req.body.id, req.body, (error, training) => {
         if (error) {
             res.json(ResponseTemplate.updateErrorOccoured(error));
         } else {
@@ -150,10 +150,6 @@ router.post('/upload', upload.array('images'), (req, res) => {
             }
             res.json(ResponseTemplate.success(
                 'training images have been successfully uploaded', { images: training_images }));
-            // res.json( ResponseTemplate.success(
-            // 	'training images have been successfully uploaded',
-            // 	{ image: Helper.trainingImageURL( training.images[training.images.length-1].url ) })
-            // );
         }
     });
 

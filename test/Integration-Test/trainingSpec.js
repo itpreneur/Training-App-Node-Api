@@ -39,53 +39,5 @@ describe('Training', () => {
                 });
         });
     });
-    /*
-     * Test the /POST route
-     */
-    describe('/POST Register Training', () => {
-        it('it should not POST a user without pages field', (done) => {
-            let user = {
-                "name": "2222",
-                "password": "122211",
-                "email": "2222@gmail.com",
-                "verify_password": "112221"
-            }
-            chai.request(server)
-                .post('/training/34awefsdw3rewd')
-                .send(user)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('message');
-                    //res.body.errors.should.have.property('pages');
-                    //res.body.errors.pages.should.have.property('kind').eql('required');
-                    done();
-                });
-        });
 
-    });
-
-    /*
-     * Test the /POST route
-     */
-    describe('/POST Login Training', () => {
-        it('it should not POST a user without pages field', (done) => {
-            let user = {
-                "password": "123456",
-                "email": "email@gmail.com",
-            }
-            chai.request(server)
-                .post('/auth')
-                .send(user)
-                .end((err, res) => {
-                    res.should.have.status(200);
-                    res.body.should.be.a('object');
-                    res.body.should.have.property('message');
-                    //res.body.errors.should.have.property('pages');
-                    //res.body.errors.pages.should.have.property('kind').eql('required');
-                    done();
-                });
-        });
-
-    });
 });

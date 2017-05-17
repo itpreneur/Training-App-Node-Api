@@ -73,7 +73,7 @@ describe('Users', () => {
                 "email": "tkssharma@gmail.com",
             }
             chai.request(server)
-                .post('/auth')
+                .post('/auth/login')
                 .send(user)
                 .end((err, res) => {
                     res.should.have.status(200);

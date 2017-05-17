@@ -16,8 +16,8 @@ let TrainingController = {
             type: training.type,
             venue_type: training.venue_type,
             geo: {
-                lat: training.geo.lat || 0,
-                lng: training.geo.lng || 0,
+                lat: training.geo ? '' : training.geo.lat || 0,
+                lng: training.geo ? '' : training.geo.lng || 0,
             },
             steps: {
                 general: true,
