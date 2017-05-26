@@ -13,6 +13,9 @@
     "docs": "apidoc -i app/ -o apidoc/",
     "coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- -R spec test/**/*.js --timeout 10000 --compilers js:babel-core/register"
   },
+  "engines": {
+    "node": "6.9.4"
+  },
   "author": "TARUN",
   "license": "MIT",
   "devDependencies": {

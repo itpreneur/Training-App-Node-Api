@@ -22,7 +22,7 @@ new AppRoutes(app, express);
 let server = app.listen(
     app.get('port'),
     () => {
-        const port = server.address().port;
+        const port = process.env.port || server.address().port;
         winston.log('info', `GenNext API running at http://localhost:${port}`)
         console.log('runing...')
     }
