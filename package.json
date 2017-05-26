@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon server.js --exec babel-node --presets es2015,stage-2",
     "test": " mocha 'test/**/*.js' --timeout 10000  --compilers js:babel-core/register",
-    "pretest" :"npm run coverage",
+    "pretest": "npm run coverage",
     "lint": "jshint --exclude ./node_modules/*.js *.js **/*.js",
     "deploy": "npm run test && npm run start",
     "test:watch": "npm t -- -w",
@@ -19,8 +19,8 @@
   "author": "TARUN",
   "license": "MIT",
   "devDependencies": {
-    "babel-cli": "6.11.4",
-    "babel-preset-es2015": "6.13.2",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-2": "6.13.0",
     "babel-register": "^6.23.0",
     "morgan": "1.7.0"
