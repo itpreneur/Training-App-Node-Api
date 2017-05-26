@@ -2,6 +2,8 @@
 
 REST API to support application features
 
+[![Build Status](https://travis-ci.org/tkssharma/Training-App-Node-Api.svg?branch=master)](https://travis-ci.org/tkssharma/Training-App-Node-Api)
+
   - Twillo notification API used
   - Braintree payment gateway
   - Express as web framework
