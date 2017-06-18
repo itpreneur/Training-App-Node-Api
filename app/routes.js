@@ -9,7 +9,6 @@ import ValidAuthTokenMiddleware from 'app/global/middlewares/ValidAuthToken';
 import DefaultServiceRoutes from 'app/services/default/routes';
 import PaymentServiceRoutes from 'app/services/payment/routes'
 import RegisterServiceRoutes from 'app/services/register/routes'
-
 let routes = function(app) {
     app.use('/uploads', express.static('uploads'));
     // user auth login routes

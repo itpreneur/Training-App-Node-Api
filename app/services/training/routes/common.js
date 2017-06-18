@@ -12,7 +12,7 @@ import path from 'path';
 import fs from 'fs';
 import config_server from 'app/config/server';
 // let upload = multer({ dest: path.join( config_server.UPLOAD_DIR, config_server.PROFILE_PICTURE_DIR ) });
-// twillo API for messaging 
+// twillo API for messaging
 import Twilio from 'app/helper/Twilio';
 
 // helper for doc upload
@@ -28,7 +28,6 @@ let storage = multer.diskStorage({
 })
 let upload = multer({ storage: storage });
 
-
 let documents_storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, path.join(config_server.UPLOAD_DIR, config_server.DOCUMENT_UPLOAD_DIR));
@@ -39,7 +38,6 @@ let documents_storage = multer.diskStorage({
     }
 })
 let uploadDocuments = multer({ storage: documents_storage });
-
 
 let router = express.Router();
 
@@ -265,5 +263,78 @@ router.post('/delete-document', (req, res) => {
             Helper.deleteFile('document', req.body.filename);
         }
     });
+});
+
+router.put('/api/login', function(req, res) {
+  var credentials = req.body;
+  if(credentials.user==='admin' && credentials.password==='123456'){
+    res.cookie('uid', '1', {domain:'127.0.0.1'});
+    res.json({'user': credentials.user, 'role': 'ADMIN', 'uid': 1});
+  }else{
+    res.status('500').send({'message' : 'Invalid user/password'});
+  }
+});
+
+router.get('/api/menu', function(req, res) {
+  res.json({
+    menus: [
+      {
+        key: 1,
+        name: 'Dashboard',
+        icon: 'user',
+        child: [
+          {
+            name: 'home',
+            key: 101,
+            url: '/home'
+          },
+          {
+            name: 'page2',
+            key: 102,
+            url: '/page2'
+          }
+        ]
+      },
+      {
+        key: 2,
+        name: 'account',
+        icon: 'laptop',
+        child: [
+          {
+            name: 'account',
+            key: 201
+          },
+          {
+            name: 'profile',
+            key: 202
+          }
+        ]
+      },
+      {
+        key: 3,
+        name: 'messages',
+        icon: 'notification',
+        child: [
+          {
+            name: 'messages',
+            key: 301
+          },
+          {
+            name: 'settings',
+            key: 302
+          }
+        ]
+      }
+    ]
+  });
+});
+
+router.post('/api/my', function(req, res) {
+  res.json({'user': 'admin', 'role': 'ADMIN', 'uid': 1});
+});
+
+router.post('/api/logout', function(req, res) {
+  res.clearCookie('uid');
+  res.json({'user': 'admin', 'role': 'ADMIN'});
 });
 module.exports = router
