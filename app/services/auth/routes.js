@@ -11,7 +11,6 @@ import Helper from 'app/helper/User';
 import UserController from 'app/services/training/controller/UserController';
 import ValidAuthTokenMiddleware from 'app/global/middlewares/ValidAuthToken';
 
-
 let router = express.Router();
 passport.serializeUser( (user, done) => {
 	done(null, user);
@@ -47,6 +46,7 @@ router.get( '/failed', (req, res) => {
  * @apiSuccess {String} code HTTP status code from API.
  * @apiSuccess {String} message Message from API.
  */
+
 router.post('/login', LocalRoutes.authenticate(),
 	( req, res ) => {
 		if ( ! req.user.email ) {
@@ -67,13 +67,6 @@ router.post('/login', LocalRoutes.authenticate(),
 	}
 );
 
-/**
- * @api {POST} /auth/register 
- * @apiName register
- * @apiGroup Auth
- * @apiSuccess {String} code HTTP status code from API.
- * @apiSuccess {String} message Message from API.
- */
 router.post( '/register', (req, res) => {
 	UserController.registerDefault( req.body, ( error, user ) => {
 		if ( error ) {
@@ -133,14 +126,25 @@ router.get( '/callback/twitter', TwitterRoutes.callback(), redirectSocialUser );
 router.get('/login/instagram', InstagramRoutes.authenticate() );
 router.get( '/callback/instagram', InstagramRoutes.callback(), redirectSocialUser );
 
-
-
 /**
  * @api {GET} /auth/validate validate token with Middleware
  * @apiName validate
  * @apiGroup Auth
  * @apiSuccess {String} code HTTP status code from API.
  * @apiSuccess {String} message Message from API.
+ */
+/**
+ * @swagger
+ * /auth/validate:
+ *   get:
+ *     tags:
+ *       - auth
+ *     description: Returns all puppies
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: An array of puppies
  */
 router.get( '/validate', ValidAuthTokenMiddleware, (req, res) => {
 	res.json({
