@@ -7,7 +7,6 @@ import {
 import auth from 'app/config/auth';
 import Service from 'app/helper/Service';
 
-
 passport.use(new TwitterStrategy({
         consumerKey: auth.twitter.client_id,
         consumerSecret: auth.twitter.client_secret,
@@ -35,7 +34,6 @@ passport.use(new TwitterStrategy({
     }
 ));
 
-
 let TwitterRoutes = {
 
     authenticate: () => {
@@ -49,6 +47,5 @@ let TwitterRoutes = {
     }
 
 }
-
 
 export default TwitterRoutes;

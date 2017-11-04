@@ -5,7 +5,6 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import auth from 'app/config/auth';
 import Service from 'app/helper/Service';
 
-
 passport.use(new FacebookStrategy(
 	{
 		clientID: auth.facebook.client_id,
@@ -35,7 +34,6 @@ passport.use(new FacebookStrategy(
 	}
 ));
 
-
 let FacebookRoutes = {
 
 	authenticate: () => {
@@ -50,6 +48,4 @@ let FacebookRoutes = {
 
 }
 
-
 export default FacebookRoutes;
-

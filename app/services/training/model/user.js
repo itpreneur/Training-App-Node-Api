@@ -49,6 +49,12 @@ UserSchema.virtual('training', {
     foreignField: 'user'
 });
 
+UserSchema.virtual('course', {
+    ref: 'Course',
+    localField: '_id',
+    foreignField: 'user'
+});
+
 UserSchema.virtual('reviews', {
     ref: 'Review',
     localField: '_id',

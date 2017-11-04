@@ -14,7 +14,6 @@ import cors from 'cors';
 import helmet from 'helmet';
 import csrf from 'csurf';
 
-
 let middleware = function(app) {
 
     app.use(passport.initialize());
@@ -30,13 +29,7 @@ let middleware = function(app) {
     app.enable('trust proxy', ['loopback', 'linklocal', 'uniquelocal'])
     app.use(express_session({
         name: 'SESS_ID',
-        secret: config_server.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: true,
-            cookie: {
-            secure: true,
-            httpOnly: true
-        }
+        secret: config_server.SESSION_SECRET
     }))
     app.use(body_parser.urlencoded({
         extended: false

@@ -6,7 +6,6 @@ import frontend_config from '../config/frontend';
 import jwt from 'jsonwebtoken';
 import Helper from './index';
 
-
 class UserHelper {
 
   static resource(path) {
@@ -34,10 +33,9 @@ class UserHelper {
 		return token;
 	}
 	static authRedirectUrl( path ) {
-		return `${frontend_config.URL}/auth/validate-token/${path}`;
+		return `${frontend_config.URL}/#/auth/validate-token/${path}`;
 	}
 
 }
-
 
 export default UserHelper;
