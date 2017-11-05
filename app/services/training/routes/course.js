@@ -25,7 +25,20 @@ router.get('/', (req, res) => {
         });
     });
 });
+// save new Webinar
+router.get('/user', (req, res) => {
 
+   CourseController.getCourseByUserId(req.user.id, (error, Course) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+            res.json(ResponseTemplate.success(
+                'new Course has been successfully added', {
+                 Course: Course
+                }));
+        }
+    });
+});
 // save new Webinar
 router.post('/', (req, res) => {
 
@@ -40,6 +53,7 @@ router.post('/', (req, res) => {
         }
     });
 });
+
 
 // update Webinar details
 router.post('/:id', (req, res) => {

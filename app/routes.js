@@ -19,7 +19,7 @@ let routes = function(app) {
     app.use('/users', UsersServiceRoutes);
     // user training routes
     app.use('/training', TrainingServiceRoutes);
-    app.use('/course', CourseServiceRoutes);
+    app.use('/course', ValidAuthTokenMiddleware, CourseServiceRoutes);
     app.use('/webinar', ValidAuthTokenMiddleware, WebinarServiceRoutes);
     app.use('/payment', ValidAuthTokenMiddleware, PaymentServiceRoutes);
     app.use('/registration', ValidAuthTokenMiddleware, RegisterServiceRoutes);

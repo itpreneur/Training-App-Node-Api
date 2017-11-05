@@ -27,6 +27,7 @@ let CourseTransformer = {
          Title: data.Title,
          Description: data.Description,
          ID: data.ID,
+         Link : data.Link,
          WelcomeV_ideo_id: data.WelcomeV_ideo_id,
          ShortDescription: data.ShortDescription,
          Thumbnails: data.Thumbnails

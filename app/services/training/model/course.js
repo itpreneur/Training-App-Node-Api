@@ -8,6 +8,9 @@ const CourseSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
+     Link : {
+     type: String
+    },
     ID:  {
      type: String
     },

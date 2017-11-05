@@ -6,14 +6,18 @@ import CourseTransformer from '../transformer/CourseTransformer';
 let CourseController = {
 
 	create: (user_id, course, callback) => {
+    console.log(course)
 		let TechCourse = new Course({
 			user: user_id,
-			title: course.title,
-			description: course.description,
+			Title: course.Title,
+			Description: course.Description,
 			ID: course.ID,
-			WelcomeV_ideo_id: course.WelcomeV_ideo_id,
+			Link : course.Link,
+			WelcomeV_ideo_id: course.WelcomeVideoId,
 			ShortDescription: course.ShortDescription,
-			Thumbnails: course.Thumbnails
+			Thumbnails: [ {
+            "FullURL" : course.Thumbnails
+        }]
 
 		});
 		TechCourse.save((error, courseData) => {
@@ -24,9 +28,8 @@ let CourseController = {
 			return CourseTransformer.transform(courseData);
 		});
 	},
-	getAll: (callback) => {
-
-		Course.find({}, (error, courseData) => {
+	getCourseByUserId: (user_id , callback) => {
+		Course.find({user: user_id}, (error, courseData) => {
 			if (error) {
 				callback(error);
 			}
