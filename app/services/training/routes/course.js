@@ -25,17 +25,18 @@ router.get('/', (req, res) => {
         });
     });
 });
-// save new Webinar
-router.get('/user', (req, res) => {
-
-   CourseController.getCourseByUserId(req.user.id, (error, Course) => {
+// get coures based on course title
+router.get('/fetch/:key', (req, res) => {
+   CourseController.getCourseByTitle(req.params.key, (error, Course) => {
         if (error) {
             res.json(ResponseTemplate.updateErrorOccoured(error));
         } else {
-            res.json(ResponseTemplate.success(
-                'new Course has been successfully added', {
-                 Course: Course
-                }));
+             // console.log(_course.data);
+             res.json({
+                code: 200,
+                message: 'success',
+                courses: Course
+            });
         }
     });
 });
@@ -53,7 +54,6 @@ router.post('/', (req, res) => {
         }
     });
 });
-
 
 // update Webinar details
 router.post('/:id', (req, res) => {
