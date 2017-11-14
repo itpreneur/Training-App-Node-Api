@@ -39,6 +39,7 @@ let TrainingController = {
             return TrainingTransformer.transform(createdEvent);
         });
     },
+    
     update: (user_id, training_id, data, callback) => {
         Training.findOne({ _id: training_id, user: user_id }, (error, training) => {
             if (error) { console.log('error', error); }
@@ -51,16 +52,16 @@ let TrainingController = {
                 if (data.location) { event.location = data.location; }
                 if (data.type) { event.type = data.type; }
             
-                training.save(function(err, event) {
+                training.save(function(err, training) {
                     if (err) {
-                        callback('error occoured while updating event');
+                        callback('error occoured while updating training');
                     } else {
                         callback(null, event);
                     }
                 });
 
             } else {
-                callback('event not found');
+                callback('training not found');
             }
         });
     }

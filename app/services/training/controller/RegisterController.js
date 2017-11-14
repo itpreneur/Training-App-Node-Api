@@ -5,30 +5,15 @@ import RegisterTransformerAPI from '../transformer/RegisterTransformer';
 
 
 let RegisterController= {
-    create: (user_id, training, callback) => {
+    create: (user_id, training_id,data, callback) => {
         let new_register = new Register({
             user: user_id,
-            title: training.title,
-            description: training.description,
-            date: training.date,
-            duration: training.duration,
-            location: training.location,
-            type: training.type,
-            venue_type: training.venue_type,
-            geo: {
-                lat: training.geo.lat || 0,
-                lng: training.geo.lng || 0,
-            },
-            steps: {
-                general: true,
-                menu: false,
-                images: false,
-                booking: false,
-                additional: false,
-            },
-            meta: {
-                approved: false
-            }
+            training: training_id,
+            description: data.description,
+            date: data.date,
+            duration: data.duration,
+            location: data.location,
+            type: data.type
         });
         new_register.save((error, createdTraining) => {
             if (error) {

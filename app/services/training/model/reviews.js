@@ -17,11 +17,6 @@ const ReviewSchema = mongoose.Schema({
         required: true,
         ref: 'Training'
     },
-    registration: {
-        type: mongoose.Schema.ObjectId,
-        required: true,
-        ref: 'Registration'
-    },
     text: {
         type: String,
         required: true
