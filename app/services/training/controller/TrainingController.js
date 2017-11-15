@@ -13,21 +13,7 @@ let TrainingController = {
             date: training.date,
             duration: training.duration,
             location: training.location,
-            type: training.type,
-            geo: {
-                lat: training.geo ? '' : training.geo.lat || 0,
-                lng: training.geo ? '' : training.geo.lng || 0,
-            },
-            steps: {
-                general: true,
-                menu: false,
-                images: false,
-                booking: false,
-                additional: false,
-            },
-            meta: {
-                approved: false
-            }
+            type: training.type
 
         });
         newTraining.save((error, createdEvent) => {
@@ -37,6 +23,21 @@ let TrainingController = {
             }
             callback(null, TrainingTransformer.transform(createdEvent));
             return TrainingTransformer.transform(createdEvent);
+        });
+    },
+    getTrainingById: (user_id, training_id, callback) => {
+        
+        Training.find({_id : training_id }).
+        populate('user').
+        populate({ path: 'registration'}).   
+        populate({ path: 'reviews'}).        
+        exec(function (err, createdTraining) {
+            if (error) {
+                callback(error);
+                return null;
+            }
+            callback(null, TrainingTransformer.transform(createdTraining));
+            return TrainingTransformer.transform(createdTraining);
         });
     },
     

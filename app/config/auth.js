@@ -1,33 +1,32 @@
 'use strict';
 
 export default {
-
 	// SCOPES AVAILABLE AT
-	// https://developers.facebook.com/docs/facebook-login/permissions
-	facebook: {
-		client_id: '********************8',
-		client_secret: '86d40ac8cbef7b7588d109a8fead8026',
-		callback_url: '/auth/callback/facebook'
-	},
+  // https://developers.facebook.com/docs/facebook-login/permissions
+  facebook: {
+   client_id: '1919742861680993',
+   client_secret: 'd886c5554983a52def998a6de2fce8e0',
+   callback_url: '/auth/callback/facebook'
+  },
 
-	// SCOPES AVAILABLE AT
-	// https://developers.google.com/identity/protocols/googlescopes
-	google: {
-		client_id: '**************************',
-		client_secret: '-x_mUjSNRKUTC6ZK8x8KUD0-',
-		callback_url: '/auth/callback/google'
-	},
+  // SCOPES AVAILABLE AT
+  // https://developers.google.com/identity/protocols/googlescopes
+    google: {
+   client_id: '1079395425192-gi9o7snektm63pabscvgqb284p7s4c8e.apps.googleusercontent.com',
+   client_secret: 'ABd81luWLFOKNC5WhSvhdYPE',
+   callback_url: '/auth/callback/google'
+  },
 
-	twitter: {
-		client_id: '***********************',
-		client_secret: 'ujhN7dZRwJUZ77OOWe6XMqgx3WeQbD79SFPMRfzIRXXmmqkFMW',
-		callback_url: '/auth/callback/twitter'
-	},
+  twitter: {
+   client_id: '3hRQgYH6S37vK8e8h3C7eg',
+   client_secret: 'ZFnyYablIh0avPb1D52uYg39auIvtIH6MwR9u2Rg1w8',
+   callback_url: '/auth/callback/twitter'
+  },
 
-	instagram: {
-		client_id: '*********************',
-		client_secret: '5ad8833897174c3fb525223935045dbc',
-		callback_url: '/auth/callback/instagram'
-	},
+  instagram: {
+   client_id: 'cfaee2ebe99e4369a732ca8214b37655',
+   client_secret: '99af16ea36c14226acabfeca09c774c1',
+   callback_url: '/auth/callback/instagram'
+  }
 
 }

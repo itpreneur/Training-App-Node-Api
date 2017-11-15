@@ -51,9 +51,8 @@ TrainingSchema.virtual('registration', {
     localField: '_id',
     foreignField: 'training'
 });
-
-TrainingSchema.virtual('topic', {
-    ref: 'Topic',
+TrainingSchema.virtual('reviews', {
+    ref: 'Review',
     localField: '_id',
     foreignField: 'training'
 });

@@ -41,9 +41,5 @@ const RegistrationSchema = mongoose.Schema({
         updatedAt: 'updated_at'
     }
 });
-RegistrationSchema.virtual('reviews', {
-    ref: 'Review',
-    localField: '_id',
-    foreignField: 'registration'
-});
+
 export default mongoose.model('Registration', RegistrationSchema);
