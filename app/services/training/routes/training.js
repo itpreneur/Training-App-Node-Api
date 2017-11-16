@@ -25,15 +25,9 @@ let upload = multer({ storage: storage });
 let router = express.Router();
 // list all trainings
 router.get('/', (req, res) => {
-
     Training.find({})
         .sort({ created_at: 1 })
         .populate('user')
-        .populate('registration')
-        .populate({
-            path: 'registration',
-            populate: { path: 'user' }
-        })
         .exec((error, trainings) => {
             if (error) {
                 res.send(error);
@@ -49,10 +43,20 @@ router.get('/', (req, res) => {
 
 });
 
-
-
-
-
+router.get('/:id', (req, res) => {
+    TrainingController.getTrainingById(req.params.id, (error, training) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+             // console.log(_course.data);
+             res.json({
+                code: 200,
+                message: 'success',
+                Training: training
+            });
+        }
+    });
+});
 
 router.get('/:id/request-approval', (req, res) => {
     let data = {
@@ -66,18 +70,6 @@ router.get('/:id/request-approval', (req, res) => {
         }
     });
 
-    /*
-    Training.findById( req.params.id, (error, training) => {
-    	if (error) {
-    		res.json( ResponseTemplate.userNotFound() );
-    	} else {
-    		res.json({
-    			code: 200,
-    			message: 'success',
-    		});
-    	}
-    });
-    */
 });
 
 router.get('/:id/completed', (req, res) => {
@@ -95,28 +87,6 @@ router.get('/:id/completed', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
-
-    Training.findById(req.params.id, (error, training) => {
-
-        if (error) {
-            res.json(ResponseTemplate.userNotFound());
-            // res.send(error);
-        } else {
-            training = TrainingTransformer.transform(training);
-            res.json({
-                code: 200,
-                message: 'success',
-                training: training
-            });
-        }
-
-    });
-
-
-});
-
-// save new training
 router.post('/', (req, res) => {
     TrainingController.create(req.body.id, req.body, (error, training) => {
         if (error) {

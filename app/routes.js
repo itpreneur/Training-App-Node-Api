@@ -18,7 +18,8 @@ let routes = function(app) {
     // user service routes
     app.use('/users', UsersServiceRoutes);
     // user training routes
-    app.use('/training', TrainingServiceRoutes);
+    //  ValidAuthTokenMiddleware to capture user object in req
+    app.use('/training',ValidAuthTokenMiddleware, TrainingServiceRoutes);
     app.use('/course', ValidAuthTokenMiddleware, CourseServiceRoutes);
     app.use('/webinar', ValidAuthTokenMiddleware, WebinarServiceRoutes);
     app.use('/payment', ValidAuthTokenMiddleware, PaymentServiceRoutes);

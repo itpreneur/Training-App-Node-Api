@@ -22,6 +22,38 @@ let ReviewController = {
             }
             return ReviewTransformer.transform(record);
         });
+    },
+    getReviewsForTraining: (training_id, data, callback) => {
+        Review.find({ _id: training_id }, (error, review) => {
+            if (err) {
+                callback('error occoured while updating Review');
+            } else {
+                callback(null, reviewData);
+            }
+        });
+    },
+    update: (user_id, training_id, data, callback) => {
+        Review.findOne({ _id: training_id, user: user_id }, (error, review) => {
+            if (error) { console.log('error', error); }
+            if (review) {
+
+                if (data.text) { review.title = data.text; }
+                if (data.rating) { review.description = data.rating; }
+                if (data.status) { review.date = data.status; }
+
+
+                review.save(function(err, reviewData) {
+                    if (err) {
+                        callback('error occoured while updating Review');
+                    } else {
+                        callback(null, reviewData);
+                    }
+                });
+
+            } else {
+                callback('Review not found');
+            }
+        });
     }
 }
 export default ReviewController;
