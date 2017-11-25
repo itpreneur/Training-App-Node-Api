@@ -7,45 +7,32 @@ const TrainingSchema = mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    title: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        required: true
-    },
-    duration: {
-        type: Number,
-        required: true,
-        default: 1
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: Number,
-        required: true,
-        default: 1
-    },
-    long_description: {
+    Link: {
         type: String
     },
-    status: {
-        type: Number,
-        default: 1
+    ID: {
+        type: String
     },
-}, {
-    timestamps: {
-        createdAt: 'created_at',
-        updatedAt: 'updated_at'
+    DurationInSeconds: {
+        type: String
+    },
+    Title: {
+        type: String
+    },
+    WelcomeVideoId: {
+        type: String
+    },
+    Description: {
+        type: String
+    },
+    ShortDescription: {
+        type: String
+    },
+    Thumbnails: {
+        type: Object
     }
 });
+
 TrainingSchema.virtual('registration', {
     ref: 'Registeration',
     localField: '_id',

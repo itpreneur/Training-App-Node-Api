@@ -8,12 +8,17 @@ let TrainingController = {
     create: (user_id, training, callback) => {
         let newTraining = new Training({
             user: user_id,
-            title: training.title,
-            description: training.description,
-            date: training.date,
-            duration: training.duration,
-            location: training.location,
-            type: training.type
+			Title: training.Title,
+			Description: training.Description,
+			ID: training.ID,
+			Link: training.Link,
+			WelcomeV_ideo_id: training.WelcomeVideoId,
+			ShortDescription: training.ShortDescription,
+			Thumbnails: [
+				{
+					"FullURL": training.Thumbnails
+				}
+			]
 
         });
         newTraining.save((error, createdEvent) => {
@@ -23,6 +28,21 @@ let TrainingController = {
             }
             callback(null, TrainingTransformer.transform(createdEvent));
             return TrainingTransformer.transform(createdEvent);
+        });
+    },
+    getTrainingByUserId :  (user_id, training_id, callback) => {
+        
+        Training.find({user : user_id }).
+        populate('user').
+        populate({ path: 'registration'}).   
+        populate({ path: 'reviews'}).        
+        exec(function (err, createdTraining) {
+            if (error) {
+                callback(error);
+                return null;
+            }
+            callback(null, TrainingTransformer.transform(createdTraining));
+            return TrainingTransformer.transform(createdTraining);
         });
     },
     getTrainingById: (user_id, training_id, callback) => {
@@ -46,12 +66,25 @@ let TrainingController = {
             if (error) { console.log('error', error); }
             if (training) {
 
-                if (data.title) { event.title = data.title; }
-                if (data.description) { event.description = data.description; }
-                if (data.date) { event.date = data.date; }
-                if (data.duration) { event.duration = data.duration; }
-                if (data.location) { event.location = data.location; }
-                if (data.type) { event.type = data.type; }
+				if (data.title) {
+					training.title = data.title;
+				}
+
+				if (data.ID) {
+					training.ID = data.ID;
+				}
+				if (data.description) {
+					training.description = data.description;
+				}
+				if (data.price) {
+					training.WelcomeV_ideo_id = data.WelcomeV_ideo_id;
+				}
+				if (data.ShortDescription) {
+					training.ShortDescription = data.ShortDescription;
+				}
+				if (data.Thumbnails) {
+					training.Thumbnails = data.Thumbnails;
+				}
             
                 training.save(function(err, training) {
                     if (err) {

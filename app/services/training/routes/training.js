@@ -58,6 +58,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
+router.get('/user', (req, res) => {
+    TrainingController.getTrainingByUserId(req.user.id, (error, training) => {
+        if (error) {
+            res.json(ResponseTemplate.updateErrorOccoured(error));
+        } else {
+             // console.log(_course.data);
+             res.json({
+                code: 200,
+                message: 'success',
+                Training: training
+            });
+        }
+    });
+});
+
 router.get('/:id/request-approval', (req, res) => {
     let data = {
         request_approval: true
@@ -88,7 +103,7 @@ router.get('/:id/completed', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    TrainingController.create(req.body.id, req.body, (error, training) => {
+    TrainingController.create(req.user.id, req.body, (error, training) => {
         if (error) {
             res.json(ResponseTemplate.updateErrorOccoured(error));
         } else {
