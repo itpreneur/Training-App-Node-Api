@@ -3,6 +3,6 @@
 export default {
 
 	default: {
-		HOST: 'mongodb://localhost:27017/ubmas',
+		HOST: 'mongodb://localhost:27017/gennext',
 	}
 }

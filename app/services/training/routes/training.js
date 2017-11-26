@@ -32,6 +32,7 @@ router.get('/', (req, res) => {
             if (error) {
                 res.send(error);
             }
+            console.log(trainings);
             trainings = TrainingTransformer.transform(trainings);
 
             res.json({
@@ -103,6 +104,7 @@ router.get('/:id/completed', (req, res) => {
 });
 
 router.post('/', (req, res) => {
+    console.log(req.body);
     TrainingController.create(req.user.id, req.body, (error, training) => {
         if (error) {
             res.json(ResponseTemplate.updateErrorOccoured(error));

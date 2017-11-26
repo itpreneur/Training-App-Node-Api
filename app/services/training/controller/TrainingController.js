@@ -21,6 +21,7 @@ let TrainingController = {
 			]
 
         });
+        
         newTraining.save((error, createdEvent) => {
             if (error) {
                 callback(error);
