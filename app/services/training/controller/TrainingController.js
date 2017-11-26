@@ -21,7 +21,7 @@ let TrainingController = {
 			]
 
         });
-        
+
         newTraining.save((error, createdEvent) => {
             if (error) {
                 callback(error);
@@ -31,13 +31,12 @@ let TrainingController = {
             return TrainingTransformer.transform(createdEvent);
         });
     },
-    getTrainingByUserId :  (user_id, training_id, callback) => {
-        
+    getTrainingByUserId :  (user_id , callback) => {
+        console.log(user_id);
+
         Training.find({user : user_id }).
-        populate('user').
-        populate({ path: 'registration'}).   
-        populate({ path: 'reviews'}).        
-        exec(function (err, createdTraining) {
+        populate('user').       
+        exec(function (error, createdTraining) {
             if (error) {
                 callback(error);
                 return null;
@@ -46,22 +45,6 @@ let TrainingController = {
             return TrainingTransformer.transform(createdTraining);
         });
     },
-    getTrainingById: (user_id, training_id, callback) => {
-        
-        Training.find({_id : training_id }).
-        populate('user').
-        populate({ path: 'registration'}).   
-        populate({ path: 'reviews'}).        
-        exec(function (err, createdTraining) {
-            if (error) {
-                callback(error);
-                return null;
-            }
-            callback(null, TrainingTransformer.transform(createdTraining));
-            return TrainingTransformer.transform(createdTraining);
-        });
-    },
-    
     update: (user_id, training_id, data, callback) => {
         Training.findOne({ _id: training_id, user: user_id }, (error, training) => {
             if (error) { console.log('error', error); }

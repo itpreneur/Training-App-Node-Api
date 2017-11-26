@@ -44,21 +44,6 @@ router.get('/', (req, res) => {
 
 });
 
-router.get('/:id', (req, res) => {
-    TrainingController.getTrainingById(req.params.id, (error, training) => {
-        if (error) {
-            res.json(ResponseTemplate.updateErrorOccoured(error));
-        } else {
-             // console.log(_course.data);
-             res.json({
-                code: 200,
-                message: 'success',
-                Training: training
-            });
-        }
-    });
-});
-
 router.get('/user', (req, res) => {
     TrainingController.getTrainingByUserId(req.user.id, (error, training) => {
         if (error) {
@@ -68,7 +53,7 @@ router.get('/user', (req, res) => {
              res.json({
                 code: 200,
                 message: 'success',
-                Training: training
+                trainings: training
             });
         }
     });
