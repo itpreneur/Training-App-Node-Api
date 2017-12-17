@@ -24,6 +24,7 @@ let CourseTransformer = {
         // console.log(data.title + data.WelcomeV_ideo_id);
         return {
          id: data._id,
+         user:data.user,
          Title: data.Title,
          Description: data.Description,
          ID: data.ID,

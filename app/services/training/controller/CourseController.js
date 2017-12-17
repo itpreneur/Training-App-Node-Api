@@ -32,7 +32,11 @@ let CourseController = {
 		});
 	},
 	getCourseByTitle: (key, callback) => {
-		Course.find({Title: key }, (error, courseData) => {
+		console.log(key);
+		
+		Course.find({'Title' : new RegExp(key, 'i')}).
+        populate('user').       
+        exec((error, courseData) => {
 			if (error) {
 				callback(error);
 			}
