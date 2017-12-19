@@ -4,7 +4,7 @@
   "description": "backend for ubmas application",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start app.js ",
+    "start": "node app.js ",
     "test": " mocha 'test/**/*.js' --timeout 10000  --compilers js:babel-core/register",
     "pretest": "npm run coverage",
     "lint": "eslint server.js",
