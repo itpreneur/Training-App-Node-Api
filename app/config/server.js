@@ -2,8 +2,8 @@
 
 export default {
 
-	HOST: 'http://localhost',
-	PORT: '2233',
+	HOST: 'http://ngtrainingapi.herokuapp.com',
+	PORT: process.env.PORT || '2233',
 	SESSION_SECRET: 'OKHSD79084570oukdwiuf34905upODUIOT90546908',
 	WEB_TOKEN_SECRET: 'HDFYOE8R43875UOKERIUO879&^(^(&*4074iuoiu701DSFRTTY78',
 
