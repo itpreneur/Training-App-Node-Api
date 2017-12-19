@@ -3,6 +3,7 @@
 export default {
 
 	default: {
-		HOST: 'mongodb://localhost:27017/gennext',
+		//HOST: 'mongodb://localhost:27017/gennext',
+		HOST : process.env.MONGODB_URI
 	}
 }

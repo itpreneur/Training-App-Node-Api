@@ -16,7 +16,7 @@
     "coverage": "babel-node node_modules/.bin/babel-istanbul cover _mocha -- -R spec test/**/*.js --timeout 10000 --compilers js:babel-core/register"
   },
   "engines": {
-    "node": "6.9.4"
+    "node": "8.0.0"
   },
   "author": "TARUN",
   "license": "MIT",
