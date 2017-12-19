@@ -41,6 +41,7 @@
   "dependencies": {
     "app-module-path": "1.1.0",
     "axios": "0.14.0",
+    "babel-register": "^6.26.0",
     "babel-istanbul": "^0.12.2",
     "babel-preset-env": "^1.6.1",
     "bcrypt-nodejs": "0.0.3",
