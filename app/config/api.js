@@ -4,12 +4,12 @@
 export default {
 
         mandrillapp: {
-        apiKey: 'yOprUh4XxO5r8tsqpDdUqQ',
-        host: 'smtp.mandrillapp.com',
+        apiKey: '**',
+        host: '**',
         port: 587,
         auth: {
-          user: 'praveen.sambu@ubmas.com',
-          pass: 'yOprUh4XxO5r8tsqpDdUqQ'
+          user: '**',
+          pass: '**'
         },
       },
 
